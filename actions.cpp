@@ -18,11 +18,6 @@ void MainWindow::saveFileAs() {
     file.close();
 
 
-
-    /*connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
-    connect(ui->actionSave_as, SIGNAL(triggered()), this, SLOT(saveFileAs()));
-    connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openFile()));
-    connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(newFile()));*/
 }
 
 void MainWindow::openFile() {

@@ -32,7 +32,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QString currentFile;
-    QShortcut *CtrlQ;
-    QShortcut *CtrlS;
+    QShortcut *CtrlQ; //exit
+    QShortcut *CtrlS; //save
+    QShortcut *CtrlN; //new file
+    QShortcut *CtrlO; //open
 };
 #endif // MAINWINDOW_H

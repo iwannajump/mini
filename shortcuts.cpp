@@ -12,4 +12,12 @@ void MainWindow::shortcuts()
     CtrlS->setKey(Qt::CTRL + Qt::Key_S);
     connect(CtrlS, SIGNAL(activated()), this, SLOT(saveFileAs()));
 
+    CtrlN = new QShortcut(this);
+    CtrlN->setKey(Qt::CTRL + Qt::Key_N);
+    connect(CtrlS, SIGNAL(activated()), this, SLOT(newFile()));
+
+    CtrlO = new QShortcut(this);
+    CtrlO->setKey(Qt::CTRL + Qt::Key_O);
+    connect(CtrlO, SIGNAL(activated()), this, SLOT(openFile()));
+
 }
