@@ -4,6 +4,7 @@
 
 
 void MainWindow::saveFileAs() {
+
     QString fileName = QFileDialog::getSaveFileName(this, "Save as");
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
@@ -28,9 +29,10 @@ void MainWindow::openFile() {
                        tr("File (*.txt);;All files(*)"));
     QFile file(fileName);
     currentFile = fileName;
-    if (!file.open(QIODevice::ReadOnly | QFile::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QFile::Text))
         QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
-    }
+
+
     setWindowTitle(fileName);
     QTextStream in(&file);
     QString text = in.readAll();
@@ -42,6 +44,21 @@ void MainWindow::openFile() {
 
 void MainWindow::newFile() {
 
-    currentFile.clear();
-    ui->TextEdit->setText(QString());
+    QString fileName = QFileDialog::getSaveFileName(this,
+                       tr("Create a new file"), "",
+                       tr("File (*.txt);;All files(*)"));
+
+    QFile file(fileName);
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
+        return;
+    }
+    else {
+        currentFile = fileName;
+        setWindowTitle(fileName);
+        QTextStream out(&file);
+        QString text = ui->TextEdit->toPlainText();
+        out << text;
+        file.close();
+    }
 }
