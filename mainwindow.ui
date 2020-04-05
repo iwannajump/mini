@@ -61,8 +61,14 @@
     <addaction name="actionRedo_2"/>
     <addaction name="menuColor_scheme"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
    <addaction name="menu"/>
    <addaction name="menuSettings"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="actionNew">
    <property name="checkable">

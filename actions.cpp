@@ -5,12 +5,17 @@
 
 void MainWindow::saveFileAs() {
 
-    QString fileName = QFileDialog::getSaveFileName(this, "Save as");
+    QString fileName = QFileDialog::getSaveFileName(this,
+                        tr("Open file"), "",
+                        tr("File (*.txt);;"
+                        "Bash script (*.sh);;"
+                        "Makefile (Makefile);;"
+                        "C++ Source file (*.cpp);;"
+                        "C++ Header file (*.h);;"
+                        "Object file (*.o);;"
+                        "All files(*)"));
+
     QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
-        return;
-    }
     currentFile = fileName;
     setWindowTitle(fileName);
     QTextStream out(&file);
@@ -18,17 +23,23 @@ void MainWindow::saveFileAs() {
     out << text;
     file.close();
 
-
 }
 
 void MainWindow::openFile() {
 
     ui->actionOpen->setToolTip("Open file");
-    QString fileName = QFileDialog::getOpenFileName(this,
-                       tr("Open file"), "",
-                       tr("File (*.txt);;All files(*)"));
+    QString fileName =  QFileDialog::getOpenFileName(this,
+                        tr("Open file"), "",
+                        tr("File (*.txt);;"
+                        "Bash script (*.sh);;"
+                        "Makefile (Makefile);;"
+                        "C++ Source file (*.cpp);;"
+                        "C++ Header file (*.h);;"
+                        "Object file (*.o);;"
+                        "All files(*)"));
     QFile file(fileName);
     currentFile = fileName;
+
     if (!file.open(QIODevice::ReadOnly | QFile::Text))
         QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
 
@@ -44,11 +55,18 @@ void MainWindow::openFile() {
 
 void MainWindow::newFile() {
 
-    QString fileName = QFileDialog::getSaveFileName(this,
-                       tr("Create a new file"), "",
-                       tr("File (*.txt);;All files(*)"));
+    QString fileName =  QFileDialog::getSaveFileName(this,
+                        tr("Open file"), "",
+                        tr("File (*.txt);;"
+                        "Bash script (*.sh);;"
+                        "Makefile (Makefile);;"
+                        "C++ Source file (*.cpp);;"
+                        "C++ Header file (*.h);;"
+                        "Object file (*.o);;"
+                        "All files(*)"));
 
     QFile file(fileName);
+
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
         QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
         return;

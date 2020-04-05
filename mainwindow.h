@@ -27,7 +27,7 @@ private slots:
     void saveFileAs();
     void openFile();
     void newFile();
-    //void copySelection();
+    //void openHelp();
 
 private:
     Ui::MainWindow *ui;
