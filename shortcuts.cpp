@@ -2,15 +2,15 @@
 #include "ui_mainwindow.h"
 
 
-void MainWindow::shortcuts()
-{
+void MainWindow::shortcuts() {
+
     CtrlQ = new QShortcut(this);
     CtrlQ->setKey(Qt::CTRL + Qt::Key_Q);
     connect(CtrlQ, SIGNAL(activated()), this, SLOT(close()));
 
     CtrlS = new QShortcut(this);
     CtrlS->setKey(Qt::CTRL + Qt::Key_S);
-    connect(CtrlS, SIGNAL(activated()), this, SLOT(saveFileAs()));
+    connect(CtrlS, SIGNAL(activated()), this, SLOT(saveFile()));
 
     CtrlN = new QShortcut(this);
     CtrlN->setKey(Qt::CTRL + Qt::Key_N);

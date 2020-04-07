@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QDataStream>
+#include <QSyntaxHighlighter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,6 +17,7 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
+
     Q_OBJECT
 
 public:
@@ -24,7 +26,10 @@ public:
     void shortcuts();
 
 private slots:
-    void saveFileAs();
+    void setColorSchemeLight();
+    void setColorSchemeDark();
+    void setColorSchemeSolarized();
+    void saveFile();
     void openFile();
     void newFile();
     //void openHelp();

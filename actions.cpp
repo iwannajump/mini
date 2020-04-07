@@ -2,26 +2,30 @@
 #include "ui_mainwindow.h"
 
 
+void MainWindow::saveFile() {
 
-void MainWindow::saveFileAs() {
+    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+        QString fileName = QFileDialog::getSaveFileName(this,
+                            tr("Open file"), "",
+                            tr("Text file (*.txt);;"
+                            "Bash script (*.sh);;"
+                            "Makefile;;"
+                            "C++ Source file (*.cpp);;"
+                            "C++ Header file (*.h);;"
+                            "Object file (*.o);;"
+                            "All files(*)"));
 
-    QString fileName = QFileDialog::getSaveFileName(this,
-                        tr("Open file"), "",
-                        tr("File (*.txt);;"
-                        "Bash script (*.sh);;"
-                        "Makefile (Makefile);;"
-                        "C++ Source file (*.cpp);;"
-                        "C++ Header file (*.h);;"
-                        "Object file (*.o);;"
-                        "All files(*)"));
+        QFile file(fileName);
+        if (!file.open(QFile::WriteOnly | QFile::Text))
+                QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
 
-    QFile file(fileName);
-    currentFile = fileName;
-    setWindowTitle(fileName);
-    QTextStream out(&file);
-    QString text = ui->TextEdit->toPlainText();
-    out << text;
-    file.close();
+        currentFile = fileName;
+        setWindowTitle(fileName);
+        QTextStream out(&file);
+        QString text = ui->TextEdit->toPlainText();
+        out << text;
+        file.close();
+    }
 
 }
 
@@ -30,9 +34,9 @@ void MainWindow::openFile() {
     ui->actionOpen->setToolTip("Open file");
     QString fileName =  QFileDialog::getOpenFileName(this,
                         tr("Open file"), "",
-                        tr("File (*.txt);;"
+                        tr("Text file (*.txt);;"
                         "Bash script (*.sh);;"
-                        "Makefile (Makefile);;"
+                        "Makefile;;"
                         "C++ Source file (*.cpp);;"
                         "C++ Header file (*.h);;"
                         "Object file (*.o);;"
@@ -57,7 +61,7 @@ void MainWindow::newFile() {
 
     QString fileName =  QFileDialog::getSaveFileName(this,
                         tr("Open file"), "",
-                        tr("File (*.txt);;"
+                        tr("Text file (*.txt);;"
                         "Bash script (*.sh);;"
                         "Makefile (Makefile);;"
                         "C++ Source file (*.cpp);;"
