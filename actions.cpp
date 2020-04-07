@@ -26,7 +26,6 @@ void MainWindow::saveFile() {
         out << text;
         file.close();
     }
-
 }
 
 void MainWindow::openFile() {
@@ -53,6 +52,9 @@ void MainWindow::openFile() {
     QString text = in.readAll();
     ui->TextEdit->setText(text);
     file.close();
+
+    ui->statusBar->showMessage(fileName);
+
 
 }
 
@@ -83,4 +85,6 @@ void MainWindow::newFile() {
         out << text;
         file.close();
     }
+
+    ui->statusBar->showMessage(fileName);
 }

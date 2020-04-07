@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(ui->actionOpen,     SIGNAL(triggered()), this, SLOT(openFile()));
     connect(ui->actionNew,      SIGNAL(triggered()), this, SLOT(newFile()));
 
-
     connect(ui->actionlight,    SIGNAL(triggered()), this, SLOT(setColorSchemeLight()));
     connect(ui->actiondark,     SIGNAL(triggered()), this, SLOT(setColorSchemeDark()));
     connect(ui->actionsolarized,SIGNAL(triggered()), this, SLOT(setColorSchemeSolarized()));
@@ -26,8 +25,4 @@ MainWindow::~MainWindow() {
     delete ui;
 
 }
-
-
-
-
 

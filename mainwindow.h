@@ -34,6 +34,7 @@ private slots:
     void newFile();
     //void openHelp();
 
+
 private:
     Ui::MainWindow *ui;
     QString currentFile;
