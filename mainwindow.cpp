@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     connect(ui->actionExit,     SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->actionSave,     SIGNAL(triggered()), this, SLOT(saveFile()));
-    connect(ui->actionOpen,     SIGNAL(triggered()), this, SLOT(openFile()));
-    connect(ui->actionNew,      SIGNAL(triggered()), this, SLOT(newFile()));
+    connect(ui->actionOpen,     SIGNAL(triggered()), this, SLOT(checkOpenFile()));
+    connect(ui->actionNew,      SIGNAL(triggered()), this, SLOT(checkNewFile()));
 
     connect(ui->actionlight,    SIGNAL(triggered()), this, SLOT(setColorSchemeLight()));
     connect(ui->actiondark,     SIGNAL(triggered()), this, SLOT(setColorSchemeDark()));

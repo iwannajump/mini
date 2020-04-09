@@ -4,9 +4,10 @@
 
 void MainWindow::saveFile() {
 
+    ui->actionSave->setToolTip("Saving file");
     if (!(ui->TextEdit->toPlainText().isEmpty())) {
         QString fileName = QFileDialog::getSaveFileName(this,
-                            tr("Open file"), "",
+                            tr("Save file"), "",
                             tr("Text file (*.txt);;"
                             "Bash script (*.sh);;"
                             "Makefile;;"
@@ -30,39 +31,54 @@ void MainWindow::saveFile() {
 
 void MainWindow::openFile() {
 
-    ui->actionOpen->setToolTip("Open file");
-    QString fileName =  QFileDialog::getOpenFileName(this,
-                        tr("Open file"), "",
-                        tr("Text file (*.txt);;"
-                        "Bash script (*.sh);;"
-                        "Makefile;;"
-                        "C++ Source file (*.cpp);;"
-                        "C++ Header file (*.h);;"
-                        "Object file (*.o);;"
-                        "All files(*)"));
-    QFile file(fileName);
-    currentFile = fileName;
+        ui->actionOpen->setToolTip("Open file");
+        QString fileName =  QFileDialog::getOpenFileName(this,
+                            tr("Open file"), "",
+                            tr("Text file (*.txt);;"
+                            "Bash script (*.sh);;"
+                            "Makefile;;"
+                            "C++ Source file (*.cpp);;"
+                            "C++ Header file (*.h);;"
+                            "Object file (*.o);;"
+                            "All files(*)"));
+        QFile file(fileName);
+        currentFile = fileName;
 
-    if (!file.open(QIODevice::ReadOnly | QFile::Text))
-        QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
-
-
-    setWindowTitle(fileName);
-    QTextStream in(&file);
-    QString text = in.readAll();
-    ui->TextEdit->setText(text);
-    file.close();
-
-    ui->statusBar->showMessage(fileName);
+        if (!file.open(QIODevice::ReadOnly | QFile::Text))
+            QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
 
 
+        setWindowTitle(fileName);
+        QTextStream in(&file);
+        QString text = in.readAll();
+        ui->TextEdit->setText(text);
+        file.close();
+
+        ui->statusBar->showMessage(fileName);
+}
+
+void MainWindow::checkOpenFile() {
+
+    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+
+        QMessageBox ask;
+        auto a = ask.question(this, "Warning", "Do you want to save an existing file?",
+                              QMessageBox::Yes | QMessageBox::No);
+
+        if (a == QMessageBox::Yes){
+        saveFile();
+        }
+        openFile ();
+
+    }
+    else openFile();
 }
 
 
 void MainWindow::newFile() {
 
     QString fileName =  QFileDialog::getSaveFileName(this,
-                        tr("Open file"), "",
+                        tr("New file"), "",
                         tr("Text file (*.txt);;"
                         "Bash script (*.sh);;"
                         "Makefile (Makefile);;"
@@ -87,4 +103,22 @@ void MainWindow::newFile() {
     }
 
     ui->statusBar->showMessage(fileName);
+}
+
+
+void MainWindow::checkNewFile() {
+
+    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+
+        QMessageBox ask;
+        auto a = ask.question(this, "Warning", "Do you want to save an existing file?",
+                              QMessageBox::Yes | QMessageBox::No);
+
+        if (a == QMessageBox::Yes){
+        saveFile();
+        }
+        newFile();
+
+    }
+    else newFile();
 }

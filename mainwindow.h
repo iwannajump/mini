@@ -31,7 +31,9 @@ private slots:
     void setColorSchemeSolarized();
     void saveFile();
     void openFile();
+    void checkOpenFile();
     void newFile();
+    void checkNewFile();
     //void openHelp();
 
 

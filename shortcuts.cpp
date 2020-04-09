@@ -14,10 +14,10 @@ void MainWindow::shortcuts() {
 
     CtrlN = new QShortcut(this);
     CtrlN->setKey(Qt::CTRL + Qt::Key_N);
-    connect(CtrlN, SIGNAL(activated()), this, SLOT(newFile()));
+    connect(CtrlN, SIGNAL(activated()), this, SLOT(checkNewFile()));
 
     CtrlO = new QShortcut(this);
     CtrlO->setKey(Qt::CTRL + Qt::Key_O);
-    connect(CtrlO, SIGNAL(activated()), this, SLOT(openFile()));
+    connect(CtrlO, SIGNAL(activated()), this, SLOT(checkOpenFile()));
 
 }
