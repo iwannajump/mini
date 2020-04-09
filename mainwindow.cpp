@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->setCentralWidget(ui->TextEdit);
 
 
-    connect(ui->actionExit,     SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->actionExit,     SIGNAL(triggered()), this, SLOT(closeFile()));
     connect(ui->actionSave,     SIGNAL(triggered()), this, SLOT(saveFile()));
     connect(ui->actionOpen,     SIGNAL(triggered()), this, SLOT(checkOpenFile()));
     connect(ui->actionNew,      SIGNAL(triggered()), this, SLOT(checkNewFile()));

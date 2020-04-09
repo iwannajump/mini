@@ -122,3 +122,26 @@ void MainWindow::checkNewFile() {
     }
     else newFile();
 }
+
+
+void MainWindow::closeFile() {
+
+    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+
+        QMessageBox ask;
+        auto a = ask.question(this, "Warning", "Do you want to save an existing file?",
+                              QMessageBox::Yes | QMessageBox::No);
+
+        if (a == QMessageBox::Yes){
+        saveFile();
+        }
+        close();
+
+    }
+    else close();
+}
+
+
+
+
+

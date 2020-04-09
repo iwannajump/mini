@@ -6,7 +6,7 @@ void MainWindow::shortcuts() {
 
     CtrlQ = new QShortcut(this);
     CtrlQ->setKey(Qt::CTRL + Qt::Key_Q);
-    connect(CtrlQ, SIGNAL(activated()), this, SLOT(close()));
+    connect(CtrlQ, SIGNAL(activated()), this, SLOT(closeFile()));
 
     CtrlS = new QShortcut(this);
     CtrlS->setKey(Qt::CTRL + Qt::Key_S);

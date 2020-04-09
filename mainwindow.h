@@ -34,6 +34,7 @@ private slots:
     void checkOpenFile();
     void newFile();
     void checkNewFile();
+    void closeFile();
     //void openHelp();
 
 
