@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 
+
 void MainWindow::saveFile() {
 
     ui->actionSave->setToolTip("Saving file");
@@ -20,11 +21,10 @@ void MainWindow::saveFile() {
         if (!file.open(QFile::WriteOnly | QFile::Text))
                 QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
 
-        currentFile = fileName;
-        setWindowTitle(fileName);
         QTextStream out(&file);
         QString text = ui->TextEdit->toPlainText();
         out << text;
+        appearance(fileName);
         file.close();
     }
 }
@@ -48,13 +48,13 @@ void MainWindow::openFile() {
             QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
 
 
-        setWindowTitle(fileName);
         QTextStream in(&file);
         QString text = in.readAll();
         ui->TextEdit->setText(text);
+        appearance(fileName);
+
         file.close();
 
-        ui->statusBar->showMessage(fileName);
 }
 
 void MainWindow::checkOpenFile() {
@@ -76,6 +76,7 @@ void MainWindow::checkOpenFile() {
 
 
 void MainWindow::newFile() {
+
 
     QString fileName =  QFileDialog::getSaveFileName(this,
                         tr("New file"), "",
@@ -99,10 +100,10 @@ void MainWindow::newFile() {
         QTextStream out(&file);
         QString text = ui->TextEdit->toPlainText();
         out << text;
+        appearance(fileName);
         file.close();
     }
 
-    ui->statusBar->showMessage(fileName);
 }
 
 

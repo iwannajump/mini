@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>874</width>
+    <width>939</width>
     <height>615</height>
    </rect>
   </property>
@@ -29,7 +29,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>874</width>
+     <width>939</width>
      <height>18</height>
     </rect>
    </property>
@@ -59,6 +59,7 @@
     <addaction name="actionUndo_2"/>
     <addaction name="actionRedo_2"/>
     <addaction name="menuColor_scheme"/>
+    <addaction name="QAChangeFont"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -156,6 +157,11 @@
   <action name="actionsolarized">
    <property name="text">
     <string>solarized</string>
+   </property>
+  </action>
+  <action name="QAChangeFont">
+   <property name="text">
+    <string>Font</string>
    </property>
   </action>
  </widget>

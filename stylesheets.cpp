@@ -8,7 +8,7 @@ void MainWindow::setColorSchemeLight() {
     ui->menuBar->setStyleSheet      ("background-color: #f0f0f0;"
                                     "color: #000000;"
                                     "border-color: #000000");
-    ui->statusBar->setStyleSheet        ("background-color: #f0f0f0;"
+    ui->statusBar->setStyleSheet    ("background-color: #f0f0f0;"
                                     "color: #000000;"
                                     "border-color: #000000");
 }

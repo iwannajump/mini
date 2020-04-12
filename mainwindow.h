@@ -6,10 +6,14 @@
 #include <QClipboard>
 #include <QFile>
 #include <QFileDialog>
+#include <QTextEdit>
 #include <QTextStream>
 #include <QMessageBox>
 #include <QDataStream>
 #include <QSyntaxHighlighter>
+#include <QRegularExpression>
+#include <QFontDialog>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,9 +30,11 @@ public:
     void shortcuts();
 
 private slots:
+    void appearance(QString fileName);
     void setColorSchemeLight();
     void setColorSchemeDark();
     void setColorSchemeSolarized();
+    void setCurrentFont();
     void saveFile();
     void openFile();
     void checkOpenFile();
@@ -45,5 +51,8 @@ private:
     QShortcut *CtrlS; //save
     QShortcut *CtrlN; //new file
     QShortcut *CtrlO; //open
+    QShortcut *scrolling;
+
 };
+
 #endif // MAINWINDOW_H

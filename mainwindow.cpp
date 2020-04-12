@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(ui->actionlight,    SIGNAL(triggered()), this, SLOT(setColorSchemeLight()));
     connect(ui->actiondark,     SIGNAL(triggered()), this, SLOT(setColorSchemeDark()));
     connect(ui->actionsolarized,SIGNAL(triggered()), this, SLOT(setColorSchemeSolarized()));
+    connect(ui->QAChangeFont,   SIGNAL(triggered()), this, SLOT(setCurrentFont()));
 
 }
 
