@@ -18,14 +18,17 @@ void MainWindow::saveFile() {
                             "All files(*)"));
 
         QFile file(fileName);
-        if (!file.open(QFile::WriteOnly | QFile::Text))
-                QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
-
-        QTextStream out(&file);
-        QString text = ui->TextEdit->toPlainText();
-        out << text;
-        appearance(fileName);
-        file.close();
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+            QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
+            //return;
+        }
+        else {
+            QTextStream out(&file);
+            QString text = ui->TextEdit->toPlainText();
+            out << text;
+            appearance(fileName);
+            file.close();
+        }
     }
 }
 
@@ -42,18 +45,19 @@ void MainWindow::openFile() {
                             "Object file (*.o);;"
                             "All files(*)"));
         QFile file(fileName);
-        currentFile = fileName;
-
-        if (!file.open(QIODevice::ReadOnly | QFile::Text))
+        if (!file.open(QIODevice::ReadOnly | QFile::Text)) {
             QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
+            //return;
+        }
+        else {
 
+            QTextStream in(&file);
+            QString text = in.readAll();
+            ui->TextEdit->setText(text);
 
-        QTextStream in(&file);
-        QString text = in.readAll();
-        ui->TextEdit->setText(text);
-        appearance(fileName);
-
-        file.close();
+            appearance(fileName);
+            file.close();
+        }
 
 }
 
@@ -95,7 +99,6 @@ void MainWindow::newFile() {
         return;
     }
     else {
-        currentFile = fileName;
         setWindowTitle(fileName);
         QTextStream out(&file);
         QString text = ui->TextEdit->toPlainText();
@@ -133,7 +136,7 @@ void MainWindow::closeFile() {
         auto a = ask.question(this, "Warning", "Do you want to save an existing file?",
                               QMessageBox::Yes | QMessageBox::No);
 
-        if (a == QMessageBox::Yes){
+        if (a == QMessageBox::Yes) {
         saveFile();
         }
         close();
@@ -141,6 +144,12 @@ void MainWindow::closeFile() {
     }
     else close();
 }
+
+
+
+
+
+
 
 
 

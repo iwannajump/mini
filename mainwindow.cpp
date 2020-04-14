@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "syntaxHighlighter.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
@@ -7,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     ui->setupUi(this);
     shortcuts();
     this->setCentralWidget(ui->TextEdit);
+
+    mySyntaxHighLighter* highlighter = new mySyntaxHighLighter(ui->TextEdit->document());
 
 
     connect(ui->actionExit,     SIGNAL(triggered()), this, SLOT(closeFile()));
@@ -18,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(ui->actiondark,     SIGNAL(triggered()), this, SLOT(setColorSchemeDark()));
     connect(ui->actionsolarized,SIGNAL(triggered()), this, SLOT(setColorSchemeSolarized()));
     connect(ui->QAChangeFont,   SIGNAL(triggered()), this, SLOT(setCurrentFont()));
+
+
+
 
 }
 

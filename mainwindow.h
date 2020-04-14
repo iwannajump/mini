@@ -7,13 +7,12 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QTextEdit>
+#include <QTextBrowser>
 #include <QTextStream>
 #include <QMessageBox>
 #include <QDataStream>
-#include <QSyntaxHighlighter>
-#include <QRegularExpression>
 #include <QFontDialog>
-
+#include <QSyntaxHighlighter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,18 +40,14 @@ private slots:
     void newFile();
     void checkNewFile();
     void closeFile();
-    //void openHelp();
-
 
 private:
     Ui::MainWindow *ui;
-    QString currentFile;
     QShortcut *CtrlQ; //exit
     QShortcut *CtrlS; //save
     QShortcut *CtrlN; //new file
     QShortcut *CtrlO; //open
-    QShortcut *scrolling;
-
 };
+
 
 #endif // MAINWINDOW_H

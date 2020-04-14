@@ -15,13 +15,13 @@ void MainWindow::setColorSchemeLight() {
 
 void MainWindow::setColorSchemeDark() {
 
-    ui->TextEdit->setStyleSheet     ("background-color: #2e3436;"
+    ui->TextEdit->setStyleSheet     ("background-color: #000000;"
                                     "color: #dadada;");
-    ui->menuBar->setStyleSheet      ("background-color: #222425;"
+    ui->menuBar->setStyleSheet      ("background-color: #0f0f0f;"
                                     "color: #dadada;"
                                     "border-color: #ffffff;"
                                     );
-    ui->statusBar->setStyleSheet    ("background-color: #222425;"
+    ui->statusBar->setStyleSheet    ("background-color: #000000;"
                                     "color: #839496;"
                                     "border-color: #ffffff;"
                                     );

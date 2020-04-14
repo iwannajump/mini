@@ -20,4 +20,12 @@ void MainWindow::shortcuts() {
     CtrlO->setKey(Qt::CTRL + Qt::Key_O);
     connect(CtrlO, SIGNAL(activated()), this, SLOT(checkOpenFile()));
 
+
+    //    scrollUp = new QShortcut(this);
+    //    scrollUp->setKey(Qt::CTRL + Qt::Key_0);
+    //    connect(scrollUp, SIGNAL(activated()), this, SLOT(zoomIn()));
+
+    //    scrollDown = new QShortcut(this);
+    //    scrollDown->setKey(Qt::CTRL + Qt::Key_Minus);
+    //    connect(scrollDown, SIGNAL(activated()), this, SLOT(zoomOut()));
 }
