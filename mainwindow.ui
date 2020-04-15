@@ -16,11 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTextEdit" name="TextEdit">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-     </widget>
+     <widget class="QPlainTextEdit" name="TextEdit"/>
     </item>
    </layout>
   </widget>

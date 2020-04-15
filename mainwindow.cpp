@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "syntaxHighlighter.h"
 #include "ui_mainwindow.h"
+#include "Linenumber.h"
+
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
                                         , ui(new Ui::MainWindow) {

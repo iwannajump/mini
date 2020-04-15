@@ -53,7 +53,8 @@ void MainWindow::openFile() {
 
             QTextStream in(&file);
             QString text = in.readAll();
-            ui->TextEdit->setText(text);
+            //ui->TextEdit->setText(text);
+            ui->TextEdit->setPlainText(text);
 
             appearance(fileName);
             file.close();

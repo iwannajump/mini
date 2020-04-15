@@ -2,6 +2,8 @@
 
 #include <QSyntaxHighlighter>
 #include <QMap>
+#include <QPlainTextEdit>
+#include "QTextEdit"
 
 class mySyntaxHighLighter: public QSyntaxHighlighter
 {
@@ -11,6 +13,7 @@ public:
   ~ mySyntaxHighLighter() {};
 
   void highlightBlock(const QString &text);
+  void highlightCurrentLine();
 
   QMap<QString, QColor> items;
 };
