@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "../mainwindow.hpp"
+#include "../ui_mainwindow.h"
 
 
 void MainWindow::appearance(QString fileName) {
