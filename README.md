@@ -1,6 +1,6 @@
 # Mini Editor
 
-##Featureless editor...
+## Featureless editor...
 
 
 How to compile?
@@ -8,6 +8,6 @@ How to compile?
 ```
 $ git clone  github.com/iwannajump/mini`
 $ cd mini
-cmake .
-make
+$ cmake .
+$ make
 ```
