@@ -100,7 +100,6 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 /* * * * * * * * * * * * *  KEYWORDS * * * * * * * * * * * * * * */
 
 
-    /* DATA TYPES */
 
 
 
@@ -114,16 +113,10 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
             setFormat(i, 7, Qt::darkCyan);
             //break
         }
-        if (text.mid(i, Kprotected.size()) == "protected ") {
+        if (text.mid(i, Kprotected.size()) == "protected ")
             setFormat(i, Kprotected.size(), Qt::darkCyan);
-        }
 
-        /* DADA TYPES */
-
-        //            if (text.startsWith(typeInt)) {
-        //                setFormat(i, typeInt.size(), Qt::darkYellow);
-        //                break;
-        //            }
+        /* DATA TYPES */
 
         if (text.mid(i, typeInt.size()) == "int ")
             setFormat(i, typeInt.size(), Qt::darkYellow);
@@ -132,19 +125,18 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
             setFormat(i, typeChar.size(), Qt::darkYellow);
 
         if (text.mid(i, typeShort.size()) == "short ")
-
             setFormat(i, typeShort.size(), Qt::darkYellow);
+
         if (text.mid(i, typeLong.size()) == "long ")
-
             setFormat(i, typeLong.size(), Qt::darkYellow);
+
         if (text.mid(i, typeAuto.size()) == "auto ")
-
             setFormat(i, typeAuto.size(), Qt::darkYellow);
+
         if (text.mid(i, typeFloat.size()) == "float ")
-
             setFormat(i, typeFloat.size(), Qt::darkYellow);
-        if (text.mid(i, typeDouble.size()) == "double ")
 
+        if (text.mid(i, typeDouble.size()) == "double ")
             setFormat(i, typeDouble.size(), Qt::darkYellow);
 
         if (text.mid(i, typeBoolean.size()) == "bool ")
@@ -153,24 +145,30 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
         if (text.mid(i, typeVoid.size()) == "void ")
             setFormat(i, typeVoid.size(), Qt::darkYellow);
 
+        if (text.mid(i, typeClass.size()) == "class ")
+            setFormat(i, typeClass.size(), Qt::darkYellow);
+
+        if (text.mid(i, typeEnum.size()) == "enum ")
+            setFormat(i, typeEnum.size(), Qt::darkYellow);
+
 
 
         if (text.mid(i, Kinclude.size()) == "#include ") {
 
-            setFormat(i, Kinclude.size(), "#c7006d");               //#include
-            setFormat(Kinclude.size(), text.length(), "#7c8df2");   //all text after "#include"
+            setFormat(i, Kinclude.size(), "#c7006d");                   //#include
+            setFormat(Kinclude.size() + i, text.length(), "#7c8df2");   //all text after "#include"
         }
 
         if (text.mid(i, Kdefine.size()) == "#define ") {
 
-            setFormat(i, Kdefine.size(), "#c7006d");                //#define
-            setFormat(Kdefine.size(), text.length(), "#7c8df2");    //all text after "#define"
+            setFormat(i, Kdefine.size(), "#c7006d");                    //#define
+            setFormat(Kdefine.size() + i, text.length(), "#7c8df2");    //all text after "#define"
         }
 
         if (text.mid(i, Kifndef.size()) == "#ifndef ") {
 
-            setFormat(i, Kifndef.size(), "#c7006d");                //#ifndef
-            setFormat(Kifndef.size(), text.length(), "#7c8df2");    //all text after "#ifndef"
+            setFormat(i, Kifndef.size(), "#c7006d");                    //#ifndef
+            setFormat(Kifndef.size() + i, text.length(), "#7c8df2");    //all text after "#ifndef"
         }
 
 
