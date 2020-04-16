@@ -13,20 +13,43 @@ QString typeDouble = "double ";
 QString typeChar = "char ";
 QString typeBoolean = "bool ";
 QString typeAuto = "auto ";
-QString keyUnsigned = "unsigned ";
+QString typeVoid = "void ";
+QString typeClass = "class ";
+QString typeStruct = "struct ";
+QString typeEnum = "enum ";
+QString typeString = "string ";
+
+
+/* PRAGMA */
+QString Kpragma = "#pragma ";
+    QString pragmaOnce = "once";
+    QString pragmaOmp = "omp";
+    QString pragmaOmpAtomic = "atomic";
+    QString pragmaOmpParallel = "parallel";
+    QString pragmaOmpFor = "for";
+    QString pragmaOmpOrdered = "ordered";
+    QString pragmaOmpSection = "section";
+    QString pragmaOmpSections = "sections";
+    QString pragmaOmpSingle = "single";
+    QString pragmaOmpMaster = "master";
+    QString pragmaOmpBarrier = "barrier";
+    QString pragmaOmpFlush = "flush";
+    QString pragmaOmpThreadPrivate = "threadprivate";
+
+
+
 
 /* KEYWORDS */
-QString Kclass = "class ";
 QString Kbreak = "break ";
 QString Kcase = "case ";
 QString Kcatch = "catch ";
 QString Kconst = "const ";
 QString Kcontinue = "continue ";
 QString Kdefault = "default ";
+QString Kdefine = "#define ";
 QString Kdelete = "delete ";
 QString Kdo = "do ";
 QString Kelse = "else ";
-QString Kenum = "enum ";
 QString Kexplicit = "explicit ";
 QString Kexport = "export ";
 QString Kextern = "extern";
@@ -35,6 +58,7 @@ QString Kfor = "for ";
 QString Kfriend = "friend ";
 QString Kgoto = "goto ";
 QString Kif = "if ";
+QString Kifndef = "#ifndef ";
 QString Kinclude = "#include ";
 QString Kinline = "inline ";
 QString Kmutable = "mutable ";
@@ -53,7 +77,6 @@ QString Kreturn = "return ";
 QString Ksigned = "signed ";
 QString Ksizeof = "sizeof ";
 QString Kstatic = "static ";
-QString Kstruct = "struct ";
 QString Kswitch = "switch ";
 QString Ktemplate = "template ";
 QString Kthis = "this ";
@@ -65,11 +88,12 @@ QString Ktypedef = "typedef ";
 QString Ktypeid = "typeid ";
 QString Ktypename = "typename ";
 QString Kunion = "union ";
+QString Kunsigned = "unsigned ";
 QString Kusing = "using ";
 QString Kvirtual = "virtual ";
-QString Kvoid = "void ";
 QString Kvolatile = "volatile ";
 QString Kwchar_t = "wchar_t ";
 QString Kwhile = "while ";
 QString Kxor = "xor ";
 #endif //MINI_COLORDATATYPES_HPP
+
