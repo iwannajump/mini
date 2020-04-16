@@ -1,5 +1,5 @@
 #include "mainwindow.hpp"
-#include "syntaxHighlighter/syntaxHighlighter.hpp"
+#include "syntaxHighlighter.hpp"
 #include "ui_mainwindow.h"
 
 
@@ -9,8 +9,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     shortcuts();
     this->setCentralWidget(ui->TextEdit);
 
+    //connect(ui->TextEdit, SIGNAL(ui->TextEdit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
+
+
     auto highlighter = new mySyntaxHighLighter(ui->TextEdit->document(), ui->TextEdit);
-    highlighter->highlightCurrentLine();
+//    highlighter->highlightCurrentLine();
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(closeFile()));
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveFile()));
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(checkOpenFile()));
@@ -29,4 +32,3 @@ MainWindow::~MainWindow() {
     delete ui;
 
 }
-
