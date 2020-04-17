@@ -15,7 +15,7 @@ void MainWindow::setCurrentFont() {
     centralWidget()->setFont(font);
     this->config.font_name = font.family();
     this->config.font_size = font.pointSize();
-    this->cfg->saveConfig(&this->config);
+    this->cfg->saveConfig(this->config);
 }
 
 

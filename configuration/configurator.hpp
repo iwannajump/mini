@@ -18,11 +18,12 @@ class configurator {
 public:
     explicit configurator(const QString &pathFile);
 
-    void loadConfig(config_t &config);
+    void loadConfig(config_t *config) const;
 
-    void saveConfig(config_t *config);
+    void saveConfig(config_t &config) const;
 
-    QFile file;
+private:
+    const QString filePath;
 
 };
 
