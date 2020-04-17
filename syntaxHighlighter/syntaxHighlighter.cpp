@@ -1,6 +1,6 @@
-#include "appearance/colorDataTypes.hpp"
-#include "syntaxHighlighter/syntaxHighlighter.hpp"
-#include "ui_mainwindow.h"
+#include "../appearance/colorDataTypes.hpp"
+#include "syntaxHighlighter.hpp"
+#include "../ui_mainwindow.h"
 
 #include <QRegularExpression>
 

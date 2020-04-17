@@ -8,6 +8,8 @@ set(CMAKE_CXX_FLAGS "-fpermissive")
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 include_directories(mini syntaxHighlighter)
 include_directories(mini behavior)
+include_directories(mini configuration)
+include_directories(mini appearance)
 set(SOURCES
         mainwindow.ui
         mainwindow.cpp
@@ -17,7 +19,6 @@ set(SOURCES
         behavior/actions.cpp
         behavior/appearance.cpp
         stylesheets.cpp
-        syntaxHighlighter/colorDataTypes.hpp
         configuration/configurator.cpp configuration/configurator.hpp)
 add_executable(mini
         ${SOURCES}
