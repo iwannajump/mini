@@ -64,6 +64,8 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
             if (text.mid(i, 1) == ">") {
 
+
+
                 state = NormalState;
                 setFormat(start, i - start + 1, "#859900");
             }
@@ -77,6 +79,26 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
     }
 
+
+/* * * * * * * * *   << AND >>   * * * * * * * * */
+
+    for (int i = 0; i < text.length(); ++i) {
+
+        if (text.mid(i, 1) == "<") {
+            if (text.mid(i+1, 1) == "<") {
+                setFormat(i, 2, Qt::red);
+            }
+        }
+
+        if (text.mid(i, 1) == ">") {
+            if (text.mid(i+1, 1) == ">") {
+                setFormat(i, 2, Qt::red);
+            }
+        }
+    }
+
+
+/* * * * * * * * * * * * *  QUOTES * * * * * * * * * * * * * * */
 
     for (int i = 0; i < text.length(); ++i) {
 
@@ -156,15 +178,15 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 
 
-        if (text.mid(i, 2) == "<<") {
-            setFormat(i, 2, Qt::darkMagenta);
-            break;
-        }
+//        if (text.mid(i, 2) == "<<") {
+//            setFormat(i, 2, Qt::darkMagenta);
+//            break;
+//        }
 
-        if (text.mid(i, 2) == ">>") {
-            setFormat(i, 2, Qt::darkMagenta);
-            break;
-        }
+//        if (text.mid(i, 2) == ">>") {
+//            setFormat(i, 2, Qt::darkMagenta);
+//            break;
+//        }
 
 
 
