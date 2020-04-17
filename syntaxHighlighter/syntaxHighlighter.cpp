@@ -98,19 +98,20 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
     }
 
 
-/* * * * * * * * * * * * *  QUOTES * * * * * * * * * * * * * * */
+/* * * * * * * * *   QUOTES   * * * * * * * * */
+
 
     for (int i = 0; i < text.length(); ++i) {
 
         if (state == CStyleComment) {
 
-            if (text.mid(i, 1) == '"') {
+            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'") {
 
                 state = NormalState;
                 setFormat(start, i - start + 1, "#859900");
             }
         } else {
-            if (text.mid(i, 1) == '"') {
+            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'") {
 
                 start = i;
                 state = CStyleComment;
@@ -167,9 +168,6 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
         if (text.mid(i, typeString.size()) == "string ")
             setFormat(i, typeString.size(), Qt::darkYellow);
 
-        if (text.mid(i, typeVoid.size()) == "void ")
-            setFormat(i, typeVoid.size(), Qt::darkYellow);
-
         if (text.mid(i, typeClass.size()) == "class ")
             setFormat(i, typeClass.size(), Qt::darkYellow);
 
@@ -178,27 +176,25 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 
 
-//        if (text.mid(i, 2) == "<<") {
-//            setFormat(i, 2, Qt::darkMagenta);
-//            break;
-//        }
-
-//        if (text.mid(i, 2) == ">>") {
-//            setFormat(i, 2, Qt::darkMagenta);
-//            break;
-//        }
 
 
+        if (text.mid(i, typeVoid.size()) == "void ") {
 
-        if (text.mid(i, Kinclude.size()) == "#include ") {
+            setFormat(i, typeVoid.size(), Qt::darkYellow);
 
-            setFormat(i, Kinclude.size(), "#c7006d");                   //#include
+            //int count = 1;
 
+            if (text.mid(i, 1) == "(") {
+                setFormat(0, i, Qt::green);
+            }
+            //else count++;
 
-
-
-            //setFormat(Kinclude.size() + i, text.length(), "#7c8df2");   //all text after "#include"
         }
+
+
+        if (text.mid(i, Kinclude.size()) == "#include ")
+            setFormat(i, Kinclude.size(), "#c7006d");
+
 
         if (text.mid(i, Kdefine.size()) == "#define ") {
 
