@@ -1,7 +1,8 @@
 #include "mainwindow.hpp"
-#include "syntaxHighlighter.hpp"
+#include "syntaxHighlighter/syntaxHighlighter.hpp"
 #include "ui_mainwindow.h"
-
+#include <QDebug>
+#include <QtCore/QProcessEnvironment>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 
@@ -10,8 +11,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->setCentralWidget(ui->TextEdit);
 
     //connect(ui->TextEdit, SIGNAL(ui->TextEdit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 
-
+    auto HOME = env.value("HOME", "/root");
+    auto cfg = new configurator(HOME + "/.config/mini/config.json");
+    cfg->loadConfig(this->config);
+    qDebug() << config.font_name + "\n";
+    qDebug() << config.font_size + "\n";
+    qDebug() << config.color_scheme + "\n";
     auto highlighter = new mySyntaxHighLighter(ui->TextEdit->document(), ui->TextEdit);
 //    highlighter->highlightCurrentLine();
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(closeFile()));

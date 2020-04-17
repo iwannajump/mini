@@ -1,5 +1,5 @@
 #include "syntaxHighlighter.hpp"
-#include "ui_mainwindow.h"
+#include "../ui_mainwindow.h"
 #include <QRegularExpression>
 #include "colorDataTypes.hpp"
 

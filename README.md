@@ -2,6 +2,18 @@
 
 ## Featureless editor...
 
+Create config file in this directory:
+`$HOME/.config/mini/config.json`
+with next content 
+```
+{
+	"config": {
+		"font_name": "font_name",
+		"font_size": 10,
+		"color_scheme": "dark"
+	}
+}
+```
 
 How to compile?
 

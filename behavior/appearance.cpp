@@ -1,8 +1,8 @@
 #include "../mainwindow.hpp"
 #include "../ui_mainwindow.h"
+#include <QDebug>
 
-
-void MainWindow::appearance(QString fileName) {
+void MainWindow::appearance(const QString &fileName) {
 
     setWindowTitle(fileName);
     ui->statusBar->showMessage(fileName);
@@ -11,49 +11,11 @@ void MainWindow::appearance(QString fileName) {
 
 
 void MainWindow::setCurrentFont() {
-
-    centralWidget()->setFont(QFontDialog::getFont(0, centralWidget()->font()));
-
+    QFont font = QFontDialog::getFont(nullptr, centralWidget()->font());
+    centralWidget()->setFont(font);
+    this->config.font_name = font.family();
+    this->config.font_size = font.pointSize();
+    this->cfg->saveConfig(&this->config);
 }
-
-
-
-//void MainWindow::zoomIn() {
-
-//    ui->TextEdit->zoomIn();
-//}
-
-
-//void MainWindow::zoomOut() {
-
-//    ui->TextEdit->zoomOut();
-//}
-
-
-//void MainWindow::zoom()
-//{
-
-//    QWheelEvent *e = nullptr;
-
-
-//        if ((e->modifiers() == Qt::ControlModifier) && (e->delta() > 0))
-//        {
-//           ui->TextEdit->zoomIn();
-//        }
-//        else if ((e->modifiers() == Qt::ControlModifier) && (e->delta() < 0) /*&& (fontPS > 8)*/)
-//        {
-//           ui->TextEdit->zoomOut();
-//        }
-//}
-
-//void MainWindow::zoom() {
-
-//    const int zoomPerOp = 2;
-//    QFont font = ui->TextEdit->font();
-//    font.setPointSize(font.pointSize() + zoomPerOp);
-//    ui->TextEdit->setFont(font);
-
-//}
-
 
 

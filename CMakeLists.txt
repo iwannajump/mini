@@ -1,8 +1,9 @@
-project(mini)
+project(mini LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-fpermissive")
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 include_directories(mini syntaxHighlighter)
@@ -16,7 +17,8 @@ set(SOURCES
         behavior/actions.cpp
         behavior/appearance.cpp
         stylesheets.cpp
-        syntaxHighlighter/colorDataTypes.hpp)
+        syntaxHighlighter/colorDataTypes.hpp
+        configuration/configurator.cpp configuration/configurator.hpp)
 add_executable(mini
         ${SOURCES}
         )

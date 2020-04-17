@@ -13,7 +13,7 @@
 #include <QDataStream>
 #include <QFontDialog>
 #include <QSyntaxHighlighter>
-
+#include "configuration/configurator.hpp"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -31,7 +31,7 @@ public:
 
 private slots:
 
-    void appearance(QString fileName);
+    void appearance(const QString &fileName);
 
     void setColorSchemeLight();
 
@@ -54,6 +54,8 @@ private slots:
     void closeFile();
 
 private:
+    config_t config;
+    configurator *cfg;
     Ui::MainWindow *ui{};
     QShortcut *CtrlQ{}; //exit
     QShortcut *CtrlS{}; //save
