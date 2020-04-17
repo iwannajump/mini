@@ -1,6 +1,16 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 
+#include "themes.h"
+
+void MainWindow::setColorScheme(const QString &name) {
+    theme* s = getColorScheme(name);
+
+    ui->TextEdit->setStyleSheet(s->textEditColors.str());
+    ui->menuBar->setStyleSheet(s->menuBarColors.str());
+    ui->statusBar->setStyleSheet(s->statusBarColors.str());
+}
+
 void MainWindow::setColorSchemeLight() {
 
     ui->TextEdit->setStyleSheet("background-color: #ffffff;"

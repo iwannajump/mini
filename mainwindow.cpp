@@ -29,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(checkOpenFile()));
     connect(ui->actionNew,  SIGNAL(triggered()), this, SLOT(checkNewFile()));
 
+    InitColorSchemes();
+
     connect(ui->actionlight,     SIGNAL(triggered()), this, SLOT(setColorSchemeLight()));
     connect(ui->actiondark,      SIGNAL(triggered()), this, SLOT(setColorSchemeDark()));
     connect(ui->actionsolarized, SIGNAL(triggered()), this, SLOT(setColorSchemeSolarized()));

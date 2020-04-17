@@ -33,6 +33,8 @@ private slots:
 
     void appearance(const QString &fileName);
 
+    void setColorScheme(const QString &name);
+
     void setColorSchemeLight();
 
     void setColorSchemeDark();

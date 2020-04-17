@@ -19,7 +19,7 @@ set(SOURCES
         behavior/actions.cpp
         behavior/appearance.cpp
         stylesheets.cpp
-        configuration/configurator.cpp configuration/configurator.hpp)
+        configuration/configurator.cpp configuration/configurator.hpp appearance/themes.cpp appearance/themes.h)
 add_executable(mini
         ${SOURCES}
         )
