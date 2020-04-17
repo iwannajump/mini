@@ -7,7 +7,7 @@
 
 class mySyntaxHighLighter : public QSyntaxHighlighter {
 public:
-    mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit);;
+    mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit);
 
     ~ mySyntaxHighLighter() {};
 
@@ -18,3 +18,4 @@ public:
     QPlainTextEdit *edit;
     QMap<QString, QColor> items;
 };
+

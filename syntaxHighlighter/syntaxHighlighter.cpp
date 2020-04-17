@@ -1,8 +1,8 @@
-#include "syntaxHighlighter.hpp"
-#include "../ui_mainwindow.h"
-#include <QRegularExpression>
-#include "colorDataTypes.hpp"
+#include "appearance/colorDataTypes.hpp"
+#include "syntaxHighlighter/syntaxHighlighter.hpp"
+#include "ui_mainwindow.h"
 
+#include <QRegularExpression>
 
 
 void mySyntaxHighLighter::highlightBlock(const QString &text) {
@@ -38,11 +38,12 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
                 state = NormalState;
                 setFormat(start, i - start + 2, "#707593");
             }
-        } else {
+        }
+        else {
             if (text.mid(i, 2) == "//") {
 
                 setFormat(i, text.length() - i, "#707593");
-                //break;
+
             } else if (text.mid(i, 2) == "/*") {
 
                 start = i;
@@ -61,13 +62,33 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
         if (state == CStyleComment) {
 
-            if (text.mid(i, 1) == ">" || text.mid(i, 1) == '"') {
+            if (text.mid(i, 1) == ">") {
 
                 state = NormalState;
                 setFormat(start, i - start + 1, "#859900");
             }
         } else {
-            if (text.mid(i, 1) == "<" || text.mid(i, 1) == '"') {
+            if (text.mid(i, 1) == "<") {
+
+                start = i;
+                state = CStyleComment;
+            }
+        }
+
+    }
+
+
+    for (int i = 0; i < text.length(); ++i) {
+
+        if (state == CStyleComment) {
+
+            if (text.mid(i, 1) == '"') {
+
+                state = NormalState;
+                setFormat(start, i - start + 1, "#859900");
+            }
+        } else {
+            if (text.mid(i, 1) == '"') {
 
                 start = i;
                 state = CStyleComment;
@@ -83,8 +104,8 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 
         /* ACCESS MODIFIERS*/
-        if (text.mid(i, Kstatic.size()) == "static")
-            setFormat(i, 6, Qt::darkCyan);
+        if (text.mid(i, Kstatic.size()) == "static ")
+            setFormat(i, Kstatic.size(), Qt::darkCyan);
 
         if (text.mid(i, Kprivate.size()) == "private ")
             setFormat(i, Kprivate.size(), Qt::darkCyan);
@@ -120,6 +141,7 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
         if (text.mid(i, typeBoolean.size()) == "bool ")
             setFormat(i, typeBoolean.size(), Qt::darkYellow);
+
         if (text.mid(i, typeString.size()) == "string ")
             setFormat(i, typeString.size(), Qt::darkYellow);
 
@@ -136,13 +158,24 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
         if (text.mid(i, 2) == "<<") {
             setFormat(i, 2, Qt::darkMagenta);
+            break;
         }
+
+        if (text.mid(i, 2) == ">>") {
+            setFormat(i, 2, Qt::darkMagenta);
+            break;
+        }
+
 
 
         if (text.mid(i, Kinclude.size()) == "#include ") {
 
             setFormat(i, Kinclude.size(), "#c7006d");                   //#include
-            setFormat(Kinclude.size() + i, text.length(), "#7c8df2");   //all text after "#include"
+
+
+
+
+            //setFormat(Kinclude.size() + i, text.length(), "#7c8df2");   //all text after "#include"
         }
 
         if (text.mid(i, Kdefine.size()) == "#define ") {
@@ -157,21 +190,33 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
             setFormat(Kifndef.size() + i, text.length(), "#7c8df2");    //all text after "#ifndef"
         }
 
+
+
         if (text.mid(i, Kpragma.size()) == "#pragma ") {
 
-            setFormat(i, Kpragma.size(), "#c7006d");                    //#pragma
+            setFormat(i, Kpragma.size(), "#c7006d");
 
             if (text.mid(i + Kpragma.size(), pragmaOnce.size()) == "once")
-                setFormat(Kpragma.size() + i, pragmaOnce.size(), "#c7006d");
-
-
-            else if (text.mid(i + Kpragma.size(), pragmaOmp.size()) == "omp")
-                setFormat(Kpragma.size() + i, pragmaOmp.size(), "#c7006d");
-
+                setFormat(Kpragma.size() + i,  pragmaOnce.size(), "#c7006d");
         }
+
+        if (text.mid(i, pragmaOmp.size()) == "#pragma omp") {
+
+            setFormat(i, pragmaOmp.size(), "#c7006d");
+
+            if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpFor.size()) == "for")
+                setFormat(pragmaOmp.size() + i + 1, pragmaOmpFor.size(), "#c7006d");
+
+            if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpFlush.size()) == "flush")
+                setFormat(pragmaOmp.size() + i + 1, pragmaOmpFlush.size(), "#c7006d");
+
+            if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpAtomic.size()) == "atomic")
+                setFormat(pragmaOmp.size() + i + 1, pragmaOmpAtomic.size(), "#c7006d");
+        }
+
+
     }   //for (line 60)
 } //void mySyntaxHighLighter::highlightBlock
-
 
 
 void mySyntaxHighLighter::highlightCurrentLine() {
@@ -196,5 +241,7 @@ void mySyntaxHighLighter::highlightCurrentLine() {
 mySyntaxHighLighter::mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit) :
         QSyntaxHighlighter(document) {
     this->edit = edit;
-    //connect(edit, SIGNAL(*edit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
+    connect(edit, SIGNAL(*edit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
 }
+
+
