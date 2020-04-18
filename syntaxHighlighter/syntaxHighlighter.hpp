@@ -5,7 +5,8 @@
 #include <QPlainTextEdit>
 #include "QTextEdit"
 
-class mySyntaxHighLighter : public QSyntaxHighlighter {
+class mySyntaxHighLighter : public QSyntaxHighlighter
+{
 public:
     mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit);
 
