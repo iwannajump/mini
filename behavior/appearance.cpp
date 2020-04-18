@@ -2,7 +2,8 @@
 #include "../ui_mainwindow.h"
 #include <QDebug>
 
-void MainWindow::appearance(const QString &fileName) {
+void MainWindow::appearance(const QString &fileName)
+{
 
     setWindowTitle(fileName);
     ui->statusBar->showMessage(fileName);
@@ -10,7 +11,8 @@ void MainWindow::appearance(const QString &fileName) {
 }
 
 
-void MainWindow::setCurrentFont() {
+void MainWindow::setCurrentFont()
+{
     QFont font = QFontDialog::getFont(nullptr, centralWidget()->font());
     centralWidget()->setFont(font);
     this->config.font_name = font.family();

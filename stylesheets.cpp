@@ -3,7 +3,8 @@
 
 #include "themes.h"
 
-void MainWindow::setColorScheme(const QString &name) {
+void MainWindow::setColorScheme(const QString &name)
+{
     theme* s = getColorScheme(name);
 
     ui->TextEdit->setStyleSheet(s->textEditColors.str());
@@ -11,7 +12,8 @@ void MainWindow::setColorScheme(const QString &name) {
     ui->statusBar->setStyleSheet(s->statusBarColors.str());
 }
 
-void MainWindow::setColorSchemeLight() {
+void MainWindow::setColorSchemeLight()
+{
 
     ui->TextEdit->setStyleSheet("background-color: #ffffff;"
                                 "color: #000000;");
@@ -23,7 +25,8 @@ void MainWindow::setColorSchemeLight() {
                                  "border-color: #000000");
 }
 
-void MainWindow::setColorSchemeDark() {
+void MainWindow::setColorSchemeDark()
+{
 
     ui->TextEdit->setStyleSheet("background-color: #000000;"
                                 "color: #dadada;");
@@ -37,7 +40,8 @@ void MainWindow::setColorSchemeDark() {
     );
 }
 
-void MainWindow::setColorSchemeSolarized() {
+void MainWindow::setColorSchemeSolarized()
+{
 
     ui->TextEdit->setStyleSheet("background-color: #002b36;"
                                 "color: #839496;");

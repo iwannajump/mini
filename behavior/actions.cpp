@@ -2,10 +2,12 @@
 #include "../ui_mainwindow.h"
 
 
-void MainWindow::saveFile() {
+void MainWindow::saveFile()
+{
 
     ui->actionSave->setToolTip("Saving file");
-    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    {
         QString fileName = QFileDialog::getSaveFileName(this,
                                                         tr("Save file"), "",
                                                         tr("Text file (*.txt);;"
@@ -17,10 +19,13 @@ void MainWindow::saveFile() {
                                                            "All files(*)"));
 
         QFile file(fileName);
-        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        if (!file.open(QFile::WriteOnly | QFile::Text))
+        {
             QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
             //return;
-        } else {
+        }
+        else
+        {
             QTextStream out(&file);
             QString text = ui->TextEdit->toPlainText();
             out << text;
@@ -30,7 +35,8 @@ void MainWindow::saveFile() {
     }
 }
 
-void MainWindow::openFile() {
+void MainWindow::openFile()
+{
 
     ui->actionOpen->setToolTip("Open file");
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -43,14 +49,14 @@ void MainWindow::openFile() {
                                                        "Object file (*.o);;"
                                                        "All files(*)"));
     QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly | QFile::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QFile::Text))
+    {
         QMessageBox::warning(this, "Warning", "Cannot open file : " + file.errorString());
-        //return;
-    } else {
-
+    }
+    else
+    {
         QTextStream in(&file);
         QString text = in.readAll();
-        //ui->TextEdit->setText(text);
         ui->TextEdit->setPlainText(text);
 
         appearance(fileName);
@@ -59,25 +65,28 @@ void MainWindow::openFile() {
 
 }
 
-void MainWindow::checkOpenFile() {
+void MainWindow::checkOpenFile()
+{
 
-    if (!(ui->TextEdit->toPlainText().isEmpty())) {
-
+    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    {
         QMessageBox ask;
         auto a = QMessageBox::question(this, "Warning", "Do you want to save an existing file?",
                                        QMessageBox::Yes | QMessageBox::No);
 
-        if (a == QMessageBox::Yes) {
+        if (a == QMessageBox::Yes)
+        {
             saveFile();
         }
         openFile();
 
-    } else openFile();
+    }
+    else openFile();
 }
 
 
-void MainWindow::newFile() {
-
+void MainWindow::newFile()
+{
 
     QString fileName = QFileDialog::getSaveFileName(this,
                                                     tr("New file"), "",
@@ -91,10 +100,13 @@ void MainWindow::newFile() {
 
     QFile file(fileName);
 
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+    if (!file.open(QFile::WriteOnly | QFile::Text))
+    {
         QMessageBox::warning(this, "Warning", "Cannot save file : " + file.errorString());
         return;
-    } else {
+    }
+    else
+    {
         setWindowTitle(fileName);
         QTextStream out(&file);
         QString text = ui->TextEdit->toPlainText();
@@ -106,37 +118,44 @@ void MainWindow::newFile() {
 }
 
 
-void MainWindow::checkNewFile() {
+void MainWindow::checkNewFile()
+{
 
-    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    {
 
-//        QMessageBox ask;
         auto a = QMessageBox::question(this, "Warning", "Do you want to save an existing file?",
                                        QMessageBox::Yes | QMessageBox::No);
 
-        if (a == QMessageBox::Yes) {
+        if (a == QMessageBox::Yes)
+        {
             saveFile();
         }
         newFile();
 
-    } else newFile();
+    }
+    else newFile();
 }
 
 
-void MainWindow::closeFile() {
+void MainWindow::closeFile()
+{
 
-    if (!(ui->TextEdit->toPlainText().isEmpty())) {
+    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    {
 
 //        QMessageBox ask;
         auto a = QMessageBox::question(this, "Warning", "Do you want to save an existing file?",
                                        QMessageBox::Yes | QMessageBox::No);
 
-        if (a == QMessageBox::Yes) {
+        if (a == QMessageBox::Yes)
+        {
             saveFile();
         }
         close();
 
-    } else close();
+    }
+    else close();
 }
 
 

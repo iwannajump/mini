@@ -5,9 +5,39 @@
 #include <QRegularExpression>
 
 
-void mySyntaxHighLighter::highlightBlock(const QString &text) {
+void mySyntaxHighLighter::highlightCurrentLine()
+{
+    QList<QTextEdit::ExtraSelection> extraSelections;
 
-    enum {
+    if (!this->edit->isReadOnly())
+    {
+        QTextEdit::ExtraSelection selection;
+
+        QColor lineColor = QColor(Qt::yellow).lighter(160);
+
+        selection.format.setBackground(lineColor);
+        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+        selection.cursor = this->edit->textCursor();
+        selection.cursor.clearSelection();
+        extraSelections.append(selection);
+    }
+
+    this->edit->setExtraSelections(extraSelections);
+}
+
+
+mySyntaxHighLighter::mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit) :
+        QSyntaxHighlighter(document)
+{
+    this->edit = edit;
+    connect(edit, SIGNAL(*edit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
+}
+
+void mySyntaxHighLighter::highlightBlock(const QString &text)
+{
+
+    enum
+    {
         NormalState = -1, CStyleComment
     };
 
@@ -19,38 +49,42 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 /* * * * * * * * * * * * *  NUMBERS * * * * * * * * * * * * * * */
 
-    for (int i = 0; i < text.length(); ++i) {
-
-        if (text.at(i).isNumber()) {
+    for (int i = 0; i < text.length(); ++i)
+        if (text.at(i).isNumber())
             setFormat(i, 1, "#D33682");
-        }
-    }
+
 
 
 /* * * * * * * * * * * * *  COMMENTS * * * * * * * * * * * * * * */
 
-    for (int i = 0; i < text.length(); ++i) {
+    for (int i = 0; i < text.length(); ++i)
+    {
 
-        if (state == CStyleComment) {
+        if (state == CStyleComment)
+        {
 
-            if (text.mid(i, 2) == "*/") {
+            if (text.mid(i, 2) == "*/")
+            {
 
                 state = NormalState;
                 setFormat(start, i - start + 2, "#707593");
             }
         }
-        else {
-            if (text.mid(i, 2) == "//") {
+        else
+        {
+            if (text.mid(i, 2) == "//")
+            {
 
                 setFormat(i, text.length() - i, "#707593");
 
-            } else if (text.mid(i, 2) == "/*") {
+            }
+            else if (text.mid(i, 2) == "/*")
+            {
 
                 start = i;
                 state = CStyleComment;
             }
         }
-
     }
 
 
@@ -58,19 +92,25 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 /* * * * * * * * *   ANGLE BRACKETS  & DOUBLE QUOTES   * * * * * * * * */
 
 
-    for (int i = 0; i < text.length(); ++i) {
+    for (int i = 0; i < text.length(); ++i)
+    {
 
-        if (state == CStyleComment) {
+        if (state == CStyleComment)
+        {
 
-            if (text.mid(i, 1) == ">") {
+            if (text.mid(i, 1) == ">")
+            {
 
 
 
                 state = NormalState;
                 setFormat(start, i - start + 1, "#859900");
             }
-        } else {
-            if (text.mid(i, 1) == "<") {
+        }
+        else
+        {
+            if (text.mid(i, 1) == "<")
+            {
 
                 start = i;
                 state = CStyleComment;
@@ -82,16 +122,20 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 /* * * * * * * * *   << AND >>   * * * * * * * * */
 
-    for (int i = 0; i < text.length(); ++i) {
+    for (int i = 0; i < text.length(); ++i)
+    {
 
         if (text.mid(i, 1) == "<") {
-            if (text.mid(i+1, 1) == "<") {
+            if (text.mid(i+1, 1) == "<")
+            {
                 setFormat(i, 2, Qt::red);
             }
         }
 
-        if (text.mid(i, 1) == ">") {
-            if (text.mid(i+1, 1) == ">") {
+        if (text.mid(i, 1) == ">")
+        {
+            if (text.mid(i+1, 1) == ">")
+            {
                 setFormat(i, 2, Qt::red);
             }
         }
@@ -101,17 +145,23 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 /* * * * * * * * *   QUOTES   * * * * * * * * */
 
 
-    for (int i = 0; i < text.length(); ++i) {
+    for (int i = 0; i < text.length(); ++i)
+    {
 
-        if (state == CStyleComment) {
+        if (state == CStyleComment)
+        {
 
-            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'") {
+            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'")
+            {
 
                 state = NormalState;
                 setFormat(start, i - start + 1, "#859900");
             }
-        } else {
-            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'") {
+        }
+        else
+        {
+            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'")
+            {
 
                 start = i;
                 state = CStyleComment;
@@ -123,7 +173,8 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 /* * * * * * * * * * * * *  KEYWORDS * * * * * * * * * * * * * * */
 
 
-    for (int i = 0; i < text.length(); ++i) {
+    for (int i = 0; i < text.length(); ++i)
+    {
 
 
         /* ACCESS MODIFIERS*/
@@ -178,13 +229,15 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 
 
-        if (text.mid(i, typeVoid.size()) == "void ") {
+        if (text.mid(i, typeVoid.size()) == "void ")
+        {
 
             setFormat(i, typeVoid.size(), Qt::darkYellow);
 
             //int count = 1;
 
-            if (text.mid(i, 1) == "(") {
+            if (text.mid(i, 1) == "(")
+            {
                 setFormat(0, i, Qt::green);
             }
             //else count++;
@@ -196,13 +249,15 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
             setFormat(i, Kinclude.size(), "#c7006d");
 
 
-        if (text.mid(i, Kdefine.size()) == "#define ") {
+        if (text.mid(i, Kdefine.size()) == "#define ")
+        {
 
             setFormat(i, Kdefine.size(), "#c7006d");                    //#define
             setFormat(Kdefine.size() + i, text.length(), "#7c8df2");    //all text after "#define"
         }
 
-        if (text.mid(i, Kifndef.size()) == "#ifndef ") {
+        if (text.mid(i, Kifndef.size()) == "#ifndef ")
+        {
 
             setFormat(i, Kifndef.size(), "#c7006d");                    //#ifndef
             setFormat(Kifndef.size() + i, text.length(), "#7c8df2");    //all text after "#ifndef"
@@ -210,7 +265,8 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
 
 
 
-        if (text.mid(i, Kpragma.size()) == "#pragma ") {
+        if (text.mid(i, Kpragma.size()) == "#pragma ")
+        {
 
             setFormat(i, Kpragma.size(), "#c7006d");
 
@@ -218,7 +274,8 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
                 setFormat(Kpragma.size() + i,  pragmaOnce.size(), "#c7006d");
         }
 
-        if (text.mid(i, pragmaOmp.size()) == "#pragma omp") {
+        if (text.mid(i, pragmaOmp.size()) == "#pragma omp")
+        {
 
             setFormat(i, pragmaOmp.size(), "#c7006d");
 
@@ -231,35 +288,9 @@ void mySyntaxHighLighter::highlightBlock(const QString &text) {
             if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpAtomic.size()) == "atomic")
                 setFormat(pragmaOmp.size() + i + 1, pragmaOmpAtomic.size(), "#c7006d");
         }
-
-
-    }   //for (line 60)
+    }   //for (line ***)
 } //void mySyntaxHighLighter::highlightBlock
 
 
-void mySyntaxHighLighter::highlightCurrentLine() {
-    QList<QTextEdit::ExtraSelection> extraSelections;
-
-    if (!this->edit->isReadOnly()) {
-        QTextEdit::ExtraSelection selection;
-
-        QColor lineColor = QColor(Qt::yellow).lighter(160);
-
-        selection.format.setBackground(lineColor);
-        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        selection.cursor = this->edit->textCursor();
-        selection.cursor.clearSelection();
-        extraSelections.append(selection);
-    }
-
-    this->edit->setExtraSelections(extraSelections);
-}
-
-
-mySyntaxHighLighter::mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit) :
-        QSyntaxHighlighter(document) {
-    this->edit = edit;
-    connect(edit, SIGNAL(*edit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
-}
 
 

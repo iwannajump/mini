@@ -11,9 +11,11 @@
 
 configurator::configurator(const QString &path): filePath(path) {}
 
-void configurator::loadConfig(config_t *config_t) const {
+void configurator::loadConfig(config_t *config_t) const
+{
     QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly)) {
+    if (!file.open(QIODevice::ReadOnly))
+    {
 //        QMessageBox::warning(, "Warning", "cannot open file for reading: " + file.errorString());
     }
     QTextStream configStream(&file);
@@ -31,9 +33,11 @@ void configurator::loadConfig(config_t *config_t) const {
 
 }
 
-void configurator::saveConfig(config_t &config) const {
+void configurator::saveConfig(config_t &config) const
+{
     QFile file(this->filePath);
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
         qErrnoWarning("Cannot open for writing...");
         exit(-1);
     }

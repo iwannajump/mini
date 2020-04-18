@@ -5,26 +5,32 @@
 #include "themes.h"
 
 colors::colors() = default;
-colors::colors(const QString &Background, const QString &Color, const QString &Border){
+colors::colors(const QString &Background, const QString &Color, const QString &Border)
+{
     bkg = Background;
     clr = Color;
     brd = Border;
 }
-QString colors::str() {
+QString colors::str()
+{
     QString s = "";
-    if (bkg != "") {
+    if (bkg != "")
+    {
         s += "background-color: " + bkg + "; ";
     }
-    if (clr != "") {
+    if (clr != "")
+    {
         s += "color: " + clr + "; ";
     }
-    if (brd != "") {
+    if (brd != "")
+    {
         s += "border-color: " + brd + ";";
     }
     return s;
 }
 
-theme::theme(const colors &text_edit, const colors &menu_bar, const colors &status_bar){
+theme::theme(const colors &text_edit, const colors &menu_bar, const colors &status_bar)
+{
     textEditColors =  text_edit;
     menuBarColors =   menu_bar;
     statusBarColors = status_bar;
@@ -32,11 +38,13 @@ theme::theme(const colors &text_edit, const colors &menu_bar, const colors &stat
 
 QMap<QString, theme*> ColorSchemes;
 
-theme* getColorScheme(const QString &name) {
+theme* getColorScheme(const QString &name)
+{
     return ColorSchemes[name];
 }
 
-void InitColorSchemes() {
+void InitColorSchemes()
+{
     ColorSchemes["Light"] = new theme(
             colors(
                     "#ffffff",

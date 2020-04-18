@@ -2,8 +2,8 @@
 #include "../ui_mainwindow.h"
 
 
-void MainWindow::shortcuts() {
-
+void MainWindow::shortcuts()
+{
     CtrlQ = new QShortcut(this);
     CtrlQ->setKey(Qt::CTRL + Qt::Key_Q);
     connect(CtrlQ, SIGNAL(activated()), this, SLOT(closeFile()));

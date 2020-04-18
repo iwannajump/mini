@@ -8,14 +8,16 @@
 #include <QString>
 #include <QtCore/QMap>
 
-struct colors {
+struct colors
+{
     QString bkg, clr, brd;
     colors();
     colors(const QString &_bkg, const QString &_clr, const QString &_brd);
     QString str();
 };
 
-class theme {
+class theme
+{
 public:
     theme(const colors &text_edit, const colors &menu_bar, const colors &status_bar);
     colors textEditColors;
