@@ -1,4 +1,4 @@
-#include "../appearance/colorDataTypes.hpp"
+#include "../syntaxHighlighter/colorDataTypes.hpp"
 #include "syntaxHighlighter.hpp"
 #include "../ui_mainwindow.h"
 

@@ -16,6 +16,7 @@ set(SOURCES
         main.cpp
         behavior/shortcuts.cpp
         syntaxHighlighter/syntaxHighlighter.cpp
+	syntaxHighlighter/colorDataTypes.hpp
         behavior/actions.cpp
         behavior/appearance.cpp
         stylesheets.cpp
