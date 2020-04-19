@@ -19,7 +19,8 @@ Highlighter::Highlighter(QTextDocument *parent)
         QStringLiteral("\\bsigned\\b"), QStringLiteral("\\bslots\\b"), QStringLiteral("\\bstatic\\b"),
         QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"), QStringLiteral("\\bunion\\b"),
         QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"), QStringLiteral("\\bvolatile\\b"),
-        QStringLiteral("\\busing\\b")
+        QStringLiteral("\\busing\\b"), QStringLiteral("\\bif\\b"), QStringLiteral("\\belse\\b"),
+        QStringLiteral("\\belif\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("\\busing\\b")
     };
 
     for (const QString &pattern : keywordPatterns)
@@ -52,6 +53,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
     classFormat.setFontWeight(QFont::Bold);
     classFormat.setForeground(Qt::darkMagenta);
+    rule.pattern = QRegularExpression(QStringLiteral("#(define|ifdef|ifndef|error|endif|include|pragma)\\b"));
     rule.pattern = QRegularExpression(QStringLiteral("#(define|ifdef|ifndef|error|include)\\b"));
     rule.format = classFormat;
     highlightingRules.append(rule);
@@ -61,6 +63,10 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
+//    quotationFormat.setForeground(Qt::red);
+//    rule.pattern = QRegularExpression(QStringLiteral("#pragma\\b"));
+//    rule.format = quotationFormat;
+//    highlightingRules.append(rule);
     quotationFormat.setForeground(Qt::red);
     rule.pattern = QRegularExpression(QStringLiteral("#pragma\\b"));
     rule.format = quotationFormat;
@@ -72,6 +78,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     quotationFormat.setForeground(Qt::darkCyan);
+    rule.pattern = QRegularExpression(QStringLiteral("([^ ]*)::"));         //->class<-::something
     rule.pattern = QRegularExpression(QStringLiteral("( .*)::"));
     rule.format = quotationFormat;
     highlightingRules.append(rule);
