@@ -23,7 +23,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     qDebug() << "Font size:"   << config.font_size;
     qDebug() << "Color scheme" << config.color_scheme;
 
-    auto highlighter = new mySyntaxHighLighter(ui->TextEdit->document(), ui->TextEdit);
+    highlighter = new Highlighter(ui->TextEdit->document());
+    //highlighter->highlightBlock();
 //    highlighter->highlightCurrentLine();
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(closeFile()));
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveFile()));

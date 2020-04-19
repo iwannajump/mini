@@ -14,6 +14,7 @@
 #include <QFontDialog>
 #include <QSyntaxHighlighter>
 #include "configuration/configurator.hpp"
+#include <../syntaxHighlighter/syntaxHighlighter.hpp>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -63,6 +64,9 @@ private:
     QShortcut *CtrlS{}; //save
     QShortcut *CtrlN{}; //new file
     QShortcut *CtrlO{}; //open
+
+    QTextEdit *editor;
+    Highlighter *highlighter;
 };
 
 

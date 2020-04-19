@@ -4,293 +4,68 @@
 
 #include <QRegularExpression>
 
-
-void mySyntaxHighLighter::highlightCurrentLine()
+Highlighter::Highlighter(QTextDocument *parent)
+    : QSyntaxHighlighter(parent)
 {
-    QList<QTextEdit::ExtraSelection> extraSelections;
+    HighlightingRule rule;
 
-    if (!this->edit->isReadOnly())
-    {
-        QTextEdit::ExtraSelection selection;
-
-        QColor lineColor = QColor(Qt::yellow).lighter(160);
-
-        selection.format.setBackground(lineColor);
-        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-        selection.cursor = this->edit->textCursor();
-        selection.cursor.clearSelection();
-        extraSelections.append(selection);
-    }
-
-    this->edit->setExtraSelections(extraSelections);
-}
-
-
-mySyntaxHighLighter::mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit) :
-        QSyntaxHighlighter(document)
-{
-    this->edit = edit;
-    connect(edit, SIGNAL(*edit->cursorPositionChanged()), this, SLOT(mySyntaxHighLighter::highlightCurrentLine));
-}
-
-void mySyntaxHighLighter::highlightBlock(const QString &text)
-{
-
-    enum
-    {
-        NormalState = -1, CStyleComment
+    keywordFormat.setForeground(Qt::darkBlue);
+    keywordFormat.setFontWeight(QFont::Bold);
+    const QString keywordPatterns[] = {
+        QStringLiteral("\\bchar\\b"), QStringLiteral("\\bclass\\b"), QStringLiteral("\\bconst\\b"),
+        QStringLiteral("\\bdouble\\b"), QStringLiteral("\\benum\\b"), QStringLiteral("\\bexplicit\\b"),
+        QStringLiteral("\\bfriend\\b"), QStringLiteral("\\binline\\b"), QStringLiteral("\\bint\\b"),
+        QStringLiteral("\\blong\\b"), QStringLiteral("\\bnamespace\\b"), QStringLiteral("\\boperator\\b"),
+        QStringLiteral("\\bprivate\\b"), QStringLiteral("\\bprotected\\b"), QStringLiteral("\\bpublic\\b"),
+        QStringLiteral("\\bshort\\b"), QStringLiteral("\\bsignals\\b"), QStringLiteral("\\bsigned\\b"),
+        QStringLiteral("\\bslots\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bstruct\\b"),
+        QStringLiteral("\\btemplate\\b"), QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"),
+        QStringLiteral("\\bunion\\b"), QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"),
+        QStringLiteral("\\bvoid\\b"), QStringLiteral("\\bvolatile\\b"), QStringLiteral("\\bbool\\b")
     };
-
-
-    int state = previousBlockState();
-    int start = 0;
-
-
-
-/* * * * * * * * * * * * *  NUMBERS * * * * * * * * * * * * * * */
-
-    for (int i = 0; i < text.length(); ++i)
-        if (text.at(i).isNumber())
-            setFormat(i, 1, "#D33682");
-
-
-
-/* * * * * * * * * * * * *  COMMENTS * * * * * * * * * * * * * * */
-
-    for (int i = 0; i < text.length(); ++i)
-    {
-
-        if (state == CStyleComment)
-        {
-
-            if (text.mid(i, 2) == "*/")
-            {
-
-                state = NormalState;
-                setFormat(start, i - start + 2, "#707593");
-            }
-        }
-        else
-        {
-            if (text.mid(i, 2) == "//")
-            {
-
-                setFormat(i, text.length() - i, "#707593");
-
-            }
-            else if (text.mid(i, 2) == "/*")
-            {
-
-                start = i;
-                state = CStyleComment;
-            }
-        }
+    for (const QString &pattern : keywordPatterns) {
+        rule.pattern = QRegularExpression(pattern);
+        rule.format = keywordFormat;
+        highlightingRules.append(rule);
     }
 
+    classFormat.setFontWeight(QFont::Bold);
+    classFormat.setForeground(Qt::darkMagenta);
+    rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
+    rule.format = classFormat;
+    highlightingRules.append(rule);
+
+    quotationFormat.setForeground(Qt::darkGreen);
+    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    rule.format = quotationFormat;
+    highlightingRules.append(rule);
+
+    functionFormat.setFontItalic(true);
+    functionFormat.setForeground(Qt::blue);
+    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
+    rule.format = functionFormat;
+    highlightingRules.append(rule);
+
+    singleLineCommentFormat.setForeground(Qt::red);
+    rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
+    rule.format = singleLineCommentFormat;
+    highlightingRules.append(rule);
+
+    multiLineCommentFormat.setForeground(Qt::red);
+
+    commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
+    commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
+
+}
 
 
-/* * * * * * * * *   ANGLE BRACKETS  & DOUBLE QUOTES   * * * * * * * * */
-
-
-    for (int i = 0; i < text.length(); ++i)
-    {
-
-        if (state == CStyleComment)
-        {
-
-            if (text.mid(i, 1) == ">")
-            {
-
-
-
-                state = NormalState;
-                setFormat(start, i - start + 1, "#859900");
-            }
-        }
-        else
-        {
-            if (text.mid(i, 1) == "<")
-            {
-
-                start = i;
-                state = CStyleComment;
-            }
-        }
-
-    }
-
-
-/* * * * * * * * *   << AND >>   * * * * * * * * */
-
-    for (int i = 0; i < text.length(); ++i)
-    {
-
-        if (text.mid(i, 1) == "<") {
-            if (text.mid(i+1, 1) == "<")
-            {
-                setFormat(i, 2, Qt::red);
-            }
-        }
-
-        if (text.mid(i, 1) == ">")
-        {
-            if (text.mid(i+1, 1) == ">")
-            {
-                setFormat(i, 2, Qt::red);
-            }
+void Highlighter::highlightBlock(const QString &text)
+{
+    for (const HighlightingRule &rule : qAsConst(highlightingRules)) {
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
     }
-
-
-/* * * * * * * * *   QUOTES   * * * * * * * * */
-
-
-    for (int i = 0; i < text.length(); ++i)
-    {
-
-        if (state == CStyleComment)
-        {
-
-            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'")
-            {
-
-                state = NormalState;
-                setFormat(start, i - start + 1, "#859900");
-            }
-        }
-        else
-        {
-            if (text.mid(i, 1) == '"' | text.mid(i, 1) == "'")
-            {
-
-                start = i;
-                state = CStyleComment;
-            }
-        }
-
-    }
-
-/* * * * * * * * * * * * *  KEYWORDS * * * * * * * * * * * * * * */
-
-
-    for (int i = 0; i < text.length(); ++i)
-    {
-
-
-        /* ACCESS MODIFIERS*/
-        if (text.mid(i, Kstatic.size()) == "static ")
-            setFormat(i, Kstatic.size(), Qt::darkCyan);
-
-        if (text.mid(i, Kprivate.size()) == "private ")
-            setFormat(i, Kprivate.size(), Qt::darkCyan);
-
-        if (text.mid(i, Kpublic.size()) == "public ")
-            setFormat(i, Kpublic.size(), Qt::darkCyan);
-
-        if (text.mid(i, Kprotected.size()) == "protected ")
-            setFormat(i, Kprotected.size(), Qt::darkCyan);
-
-        /* DATA TYPES */
-
-        if (text.mid(i, typeInt.size()) == "int ")
-            setFormat(i, typeInt.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeChar.size()) == "char ")
-            setFormat(i, typeChar.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeShort.size()) == "short ")
-            setFormat(i, typeShort.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeLong.size()) == "long ")
-            setFormat(i, typeLong.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeAuto.size()) == "auto ")
-            setFormat(i, typeAuto.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeFloat.size()) == "float ")
-            setFormat(i, typeFloat.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeDouble.size()) == "double ")
-            setFormat(i, typeDouble.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeBoolean.size()) == "bool ")
-            setFormat(i, typeBoolean.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeString.size()) == "string ")
-            setFormat(i, typeString.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeClass.size()) == "class ")
-            setFormat(i, typeClass.size(), Qt::darkYellow);
-
-        if (text.mid(i, typeEnum.size()) == "enum ")
-            setFormat(i, typeEnum.size(), Qt::darkYellow);
-
-
-
-
-
-        if (text.mid(i, typeVoid.size()) == "void ")
-        {
-
-            setFormat(i, typeVoid.size(), Qt::darkYellow);
-
-            //int count = 1;
-
-            if (text.mid(i, 1) == "(")
-            {
-                setFormat(0, i, Qt::green);
-            }
-            //else count++;
-
-        }
-
-
-        if (text.mid(i, Kinclude.size()) == "#include ")
-            setFormat(i, Kinclude.size(), "#c7006d");
-
-
-        if (text.mid(i, Kdefine.size()) == "#define ")
-        {
-
-            setFormat(i, Kdefine.size(), "#c7006d");                    //#define
-            setFormat(Kdefine.size() + i, text.length(), "#7c8df2");    //all text after "#define"
-        }
-
-        if (text.mid(i, Kifndef.size()) == "#ifndef ")
-        {
-
-            setFormat(i, Kifndef.size(), "#c7006d");                    //#ifndef
-            setFormat(Kifndef.size() + i, text.length(), "#7c8df2");    //all text after "#ifndef"
-        }
-
-
-
-        if (text.mid(i, Kpragma.size()) == "#pragma ")
-        {
-
-            setFormat(i, Kpragma.size(), "#c7006d");
-
-            if (text.mid(i + Kpragma.size(), pragmaOnce.size()) == "once")
-                setFormat(Kpragma.size() + i,  pragmaOnce.size(), "#c7006d");
-        }
-
-        if (text.mid(i, pragmaOmp.size()) == "#pragma omp")
-        {
-
-            setFormat(i, pragmaOmp.size(), "#c7006d");
-
-            if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpFor.size()) == "for")
-                setFormat(pragmaOmp.size() + i + 1, pragmaOmpFor.size(), "#c7006d");
-
-            if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpFlush.size()) == "flush")
-                setFormat(pragmaOmp.size() + i + 1, pragmaOmpFlush.size(), "#c7006d");
-
-            if (text.mid(i + pragmaOmp.size() + 1, pragmaOmpAtomic.size()) == "atomic")
-                setFormat(pragmaOmp.size() + i + 1, pragmaOmpAtomic.size(), "#c7006d");
-        }
-    }   //for (line ***)
-} //void mySyntaxHighLighter::highlightBlock
-
-
-
-
+}

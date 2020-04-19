@@ -3,20 +3,34 @@
 #include <QSyntaxHighlighter>
 #include <QMap>
 #include <QPlainTextEdit>
-#include "QTextEdit"
+#include <QRegularExpression>
+#include <QTextEdit>
 
-class mySyntaxHighLighter : public QSyntaxHighlighter
+class Highlighter : public QSyntaxHighlighter
 {
+    Q_OBJECT
+
 public:
-    mySyntaxHighLighter(QTextDocument *document, QPlainTextEdit *edit);
+    Highlighter(QTextDocument *parent = 0);
 
-    ~ mySyntaxHighLighter() {};
+protected:
+    void highlightBlock(const QString &text) override;
 
-    void highlightBlock(const QString &text);
+private:
+    struct HighlightingRule
+    {
+        QRegularExpression pattern;
+        QTextCharFormat format;
+    };
+    QVector<HighlightingRule> highlightingRules;
 
-    void highlightCurrentLine();
+    QRegularExpression commentStartExpression;
+    QRegularExpression commentEndExpression;
 
-    QPlainTextEdit *edit;
-    QMap<QString, QColor> items;
+    QTextCharFormat keywordFormat;
+    QTextCharFormat classFormat;
+    QTextCharFormat singleLineCommentFormat;
+    QTextCharFormat multiLineCommentFormat;
+    QTextCharFormat quotationFormat;
+    QTextCharFormat functionFormat;
 };
-
