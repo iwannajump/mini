@@ -21,8 +21,10 @@ Highlighter::Highlighter(QTextDocument *parent)
         QStringLiteral("\\btypedef\\b"), QStringLiteral("\\btypename\\b"), QStringLiteral("\\bunion\\b"),
         QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"), QStringLiteral("\\bvolatile\\b"),
         QStringLiteral("\\busing\\b"), QStringLiteral("\\bif\\b"), QStringLiteral("\\belse\\b"),
-        QStringLiteral("\\belif\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("\\busing\\b")
+        QStringLiteral("\\belif\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("\\busing\\b"),
+        QStringLiteral("\\boverride\\b"), QStringLiteral("\\bnullptr\\b"), QStringLiteral("\\bNULL\\b")
     };
+
 
     for (const QString &pattern : keywordPatterns)
     {
@@ -47,7 +49,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     }
 
     classFormat.setFontWeight(QFont::Bold);
-    classFormat.setForeground(Qt::darkMagenta);
+    classFormat.setForeground(Qt::cyan);
     rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
     rule.format = classFormat;
     highlightingRules.append(rule);
@@ -99,8 +101,13 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     functionFormat.setFontItalic(true);
-    functionFormat.setForeground(Qt::cyan);
-    rule.pattern = QRegularExpression(QStringLiteral("\\b[[^Q]A-Za-z0-9_]+(?=\\()")); //void ->somename<-()
+    functionFormat.setForeground(Qt::darkCyan);
+    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()")); //void ->something<-()
+    rule.format = functionFormat;
+    highlightingRules.append(rule);
+
+    functionFormat.setForeground(Qt::darkGreen);
+    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=;)")); //int ->name<-;
     rule.format = functionFormat;
     highlightingRules.append(rule);
 
