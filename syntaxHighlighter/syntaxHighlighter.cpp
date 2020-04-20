@@ -22,9 +22,9 @@ Highlighter::Highlighter(QTextDocument *parent)
         QStringLiteral("\\bunsigned\\b"), QStringLiteral("\\bvirtual\\b"), QStringLiteral("\\bvolatile\\b"),
         QStringLiteral("\\busing\\b"), QStringLiteral("\\bif\\b"), QStringLiteral("\\belse\\b"),
         QStringLiteral("\\belif\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("\\busing\\b"),
-        QStringLiteral("\\boverride\\b"), QStringLiteral("\\bnullptr\\b"), QStringLiteral("\\bNULL\\b")
+        QStringLiteral("\\boverride\\b"), QStringLiteral("\\bnullptr\\b"), QStringLiteral("\\bNULL\\b"),
+        QStringLiteral("\\bgoto\\b"),
     };
-
 
     for (const QString &pattern : keywordPatterns)
     {
@@ -50,7 +50,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
     classFormat.setFontWeight(QFont::Bold);
     classFormat.setForeground(Qt::cyan);
-    rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));      //Q(....)
     rule.format = classFormat;
     highlightingRules.append(rule);
 
@@ -64,14 +64,14 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.pattern = QRegularExpression(QStringLiteral("<<|>>"));
     rule.format = quotationFormat;
     highlightingRules.append(rule);
-
-    quotationFormat.setForeground(Qt::red);
-    rule.pattern = QRegularExpression(QStringLiteral("#pragma\\b"));
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
-
+    
     classFormat.setForeground(Qt::darkYellow);
     rule.pattern = QRegularExpression(QStringLiteral("<.*>"));                  //<...>
+    rule.format = classFormat;
+    highlightingRules.append(rule);
+
+    classFormat.setForeground(Qt::yellow);
+    rule.pattern = QRegularExpression(QStringLiteral("\\b(\\w+):$"));           //tryexec: (goto label)
     rule.format = classFormat;
     highlightingRules.append(rule);
 
@@ -80,8 +80,14 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
+    quotationFormat.setForeground(Qt::red);
+    rule.pattern = QRegularExpression(QStringLiteral("::[A-Za-z]+"));           //::->something<-
+    rule.format = quotationFormat;
+    highlightingRules.append(rule);
+
     quotationFormat.setForeground(Qt::darkCyan);
-    rule.pattern = QRegularExpression(QStringLiteral("([^ ]*)\\."));            //->word<-.something
+    //rule.pattern = QRegularExpression(QStringLiteral("([^ ]*)\\."));            //->word<-.something
+    rule.pattern = QRegularExpression(QStringLiteral("([\\w ]*)\\."));
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
@@ -91,12 +97,12 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     quotationFormat.setForeground(Qt::darkYellow);
-    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));                //"text"
+    rule.pattern = QRegularExpression(QStringLiteral("\"(\\.|[^\"])*\""));      //"text"
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     quotationFormat.setForeground(Qt::darkYellow);
-    rule.pattern = QRegularExpression(QStringLiteral("\'.*\'"));                //'text'
+    rule.pattern = QRegularExpression(QStringLiteral("\'(\\.|[^\'])*\'"));      //'text'
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
