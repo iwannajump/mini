@@ -32,3 +32,4 @@ private:
     QTextCharFormat quotationFormat;
     QTextCharFormat functionFormat;
 };
+
