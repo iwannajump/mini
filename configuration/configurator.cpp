@@ -3,13 +3,17 @@
 //
 
 #include "configurator.hpp"
+#include "../ui_mainwindow.h"
+#include "../mainwindow.hpp"
 #include <QtDebug>
 #include <QMessageBox>
 #include <QTextStream>
 #include <QtCore/QJsonParseError>
 #include <QtCore/QJsonObject>
 
+
 configurator::configurator(const QString &path): filePath(path) {}
+
 
 void configurator::loadConfig(config_t *config_t) const
 {
@@ -32,6 +36,7 @@ void configurator::loadConfig(config_t *config_t) const
     file.close();
 
 }
+
 
 void configurator::saveConfig(config_t &config) const
 {

@@ -2,8 +2,7 @@
 // Created by dmitry on 4/17/20.
 //
 
-#ifndef MINI_THEMES_H
-#define MINI_THEMES_H
+#pragma once
 
 #include <QString>
 #include <QtCore/QMap>
@@ -28,5 +27,3 @@ public:
 theme* getColorScheme(const QString &name);
 
 void InitColorSchemes();
-
-#endif //MINI_THEMES_H

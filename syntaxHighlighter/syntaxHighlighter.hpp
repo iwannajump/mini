@@ -12,8 +12,6 @@ class Highlighter : public QSyntaxHighlighter
 
 public:
     Highlighter(QTextDocument *parent = 0);
-
-protected:
     void highlightBlock(const QString &text) override;
 
 private:
@@ -22,11 +20,10 @@ private:
         QRegularExpression pattern;
         QTextCharFormat format;
     };
-    QVector<HighlightingRule> highlightingRules;
 
+    QVector<HighlightingRule> highlightingRules;
     QRegularExpression commentStartExpression;
     QRegularExpression commentEndExpression;
-
     QTextCharFormat keywordFormat;
     QTextCharFormat dataTypeFormat;
     QTextCharFormat classFormat;

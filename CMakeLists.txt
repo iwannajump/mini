@@ -10,15 +10,17 @@ include_directories(mini syntaxHighlighter)
 include_directories(mini behavior)
 include_directories(mini configuration)
 include_directories(mini appearance)
+include_directories(mini fileBrowser)
 set(SOURCES
         mainwindow.ui
         mainwindow.cpp
+		mainwindow.hpp
         main.cpp
         behavior/shortcuts.cpp
+		behavior/actions.cpp
+		behavior/appearance.cpp
         syntaxHighlighter/syntaxHighlighter.cpp
-	syntaxHighlighter/colorDataTypes.hpp
-        behavior/actions.cpp
-        behavior/appearance.cpp
+		syntaxHighlighter/syntaxHighlighter.hpp
         stylesheets.cpp
         configuration/configurator.cpp configuration/configurator.hpp appearance/themes.cpp appearance/themes.h)
 add_executable(mini

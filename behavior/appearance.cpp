@@ -4,10 +4,8 @@
 
 void MainWindow::appearance(const QString &fileName)
 {
-
     setWindowTitle(fileName);
     ui->statusBar->showMessage(fileName);
-
 }
 
 
@@ -19,5 +17,3 @@ void MainWindow::setCurrentFont()
     this->config.font_size = font.pointSize();
     this->cfg->saveConfig(this->config);
 }
-
-
