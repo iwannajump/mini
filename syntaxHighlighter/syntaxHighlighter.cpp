@@ -22,6 +22,8 @@ Highlighter::Highlighter(QTextDocument *parent)
         QString("\\busing\\b"), QString("\\bif\\b"), QString("\\belse\\b"),
         QString("\\belif\\b"), QString("\\bwhile\\b"), QString("\\busing\\b"),
         QString("\\boverride\\b"), QString("\\bnullptr\\b"), QString("\\bNULL\\b"),
+        QString("\\bfor\\b"), QString("\\breturn\\b"), QString("\\bthis\\b"),
+        QString("\\bfalse\\b"), QString("\\btrue\\b"), QString("\\bnullptr\\b")
     };
 
     for (const QString &pattern : keywordPatterns)
@@ -68,9 +70,20 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
+    quotationFormat.setFontWeight(2);
+    quotationFormat.setForeground(QColor(178, 150, 0)); //gold
+    rule.pattern = QRegularExpression(QString("\\bmain\\b"));
+    rule.format = quotationFormat;
+    highlightingRules.append(rule);
+
     classFormat.setForeground(Qt::darkYellow);
-    rule.pattern = QRegularExpression(QString("<.*>"));                             //<...>
+    rule.pattern = QRegularExpression(QString("\\<(?:\\\\<|.)*?\\>"));                             //<...>
     rule.format = classFormat;
+    highlightingRules.append(rule);
+
+    classFormat.setForeground(Qt::darkYellow);
+    rule.pattern = QRegularExpression(QString("->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|"));
+    rule.format = classFormat;                                                      //symbols
     highlightingRules.append(rule);
 
     classFormat.setForeground(Qt::yellow);
@@ -83,12 +96,12 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
-    quotationFormat.setForeground(QColor(135, 100, 65));    //light brown
+    quotationFormat.setForeground(QColor(115, 200, 130));    //mint
     rule.pattern = QRegularExpression(QString("\"(?:\\\"|.)*?\""));                  //"text"
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
-    quotationFormat.setForeground(Qt::darkYellow);
+    quotationFormat.setForeground(QColor(115, 200, 130));   //mint
     rule.pattern = QRegularExpression(QString("\'(?:\\\'|.)*?\'"));                 //'text'
     rule.format = quotationFormat;
     highlightingRules.append(rule);
@@ -140,6 +153,4 @@ void Highlighter::highlightBlock(const QString &text)
         startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
     }
 }
-
-
 
