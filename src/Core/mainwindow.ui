@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>939</width>
-     <height>18</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -54,7 +54,7 @@
      <addaction name="actionsolarized"/>
     </widget>
     <addaction name="actionUndo_2"/>
-    <addaction name="actionRedo_2"/>
+    <addaction name="actionRedo"/>
     <addaction name="menuColor_scheme"/>
     <addaction name="QAChangeFont"/>
    </widget>
@@ -135,7 +135,7 @@
     <string>Undo</string>
    </property>
   </action>
-  <action name="actionRedo_2">
+  <action name="actionRedo">
    <property name="text">
     <string>Redo</string>
    </property>

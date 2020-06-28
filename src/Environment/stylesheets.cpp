@@ -1,57 +1,50 @@
-#include "ui_mainwindow.h"
-#include "src/core/mainwindow.hpp"
+#include "src/Core/mainwindow.hpp"
 
-
-#include "themes.h"
-
-void MainWindow::setColorScheme(const QString &name)
+struct Theme
 {
-    theme* s = getColorScheme(name);
-
-    ui->TextEdit->setStyleSheet(s->textEditColors.str());
-    ui->menuBar->setStyleSheet(s->menuBarColors.str());
-    ui->statusBar->setStyleSheet(s->statusBarColors.str());
-}
+    static void textEditStyle
+    (Ui::MainWindow * ui, QString bg, QString color, QString border)
+    {
+        ui->TextEdit->setStyleSheet
+            ("background-color: " + bg + ";"
+            "color: " +  color + ";"
+            "border-color: " + border );
+    }
+    static void menuBarStyle
+    (Ui::MainWindow * ui, QString bg, QString color, QString border)
+    {
+        ui->menuBar->setStyleSheet
+            ("background-color: " + bg + ";"
+            "color: " +  color + ";"
+            "border-color: " + border );
+    }
+    static void statusBarStyle
+    (Ui::MainWindow * ui, QString bg, QString color, QString border)
+    {
+        ui->statusBar->setStyleSheet
+            ("background-color: " + bg + ";"
+            "color: " +  color + ";"
+            "border-color: " + border );
+    }
+};
 
 void MainWindow::setColorSchemeLight()
 {
-
-    ui->TextEdit->setStyleSheet("background-color: #ffffff;"
-                                "color: #000000;");
-    ui->menuBar->setStyleSheet("background-color: #f0f0f0;"
-                               "color: #000000;"
-                               "border-color: #000000");
-    ui->statusBar->setStyleSheet("background-color: #f0f0f0;"
-                                 "color: #000000;"
-                                 "border-color: #000000");
+    Theme::textEditStyle (ui, "#ffffff", "#f0f0f0", "#000000");
+    Theme::menuBarStyle  (ui, "#ffffff", "#f0f0f0", "#000000");
+    Theme::statusBarStyle(ui, "#ffffff", "#f0f0f0", "#000000");
 }
 
 void MainWindow::setColorSchemeDark()
 {
-
-    ui->TextEdit->setStyleSheet("background-color: #000000;"
-                                "color: #dadada;");
-    ui->menuBar->setStyleSheet("background-color: #0f0f0f;"
-                               "color: #dadada;"
-                               "border-color: #ffffff;"
-    );
-    ui->statusBar->setStyleSheet("background-color: #000000;"
-                                 "color: #839496;"
-                                 "border-color: #ffffff;"
-    );
+    Theme::textEditStyle (ui, "#000000", "#dadada", "#dadada");
+    Theme::menuBarStyle  (ui, "#0f0f0f", "#dadada", "#ffffff");
+    Theme::statusBarStyle(ui, "#0f0f0f", "#839496", "#ffffff");
 }
 
 void MainWindow::setColorSchemeSolarized()
 {
-
-    ui->TextEdit->setStyleSheet("background-color: #002b36;"
-                                "color: #839496;");
-    ui->menuBar->setStyleSheet("background-color: #001c24;"
-                               "color: #839496;"
-                               "border-color: #ffffff;"
-    );
-    ui->statusBar->setStyleSheet("background-color: #001c24;"
-                                 "color: #839496;"
-                                 "border-color: #ffffff;"
-    );
+    Theme::textEditStyle (ui, "#002b36", "#839496", "#ffffff");
+    Theme::menuBarStyle  (ui, "#001c24", "#839496", "#ffffff");
+    Theme::statusBarStyle(ui, "#001c24", "#839496", "#ffffff");
 }

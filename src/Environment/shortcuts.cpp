@@ -1,22 +1,22 @@
 #include "ui_mainwindow.h"
-#include "src/core/mainwindow.hpp"
+#include "src/Core/mainwindow.hpp"
 
 
-void MainWindow::shortcuts()
+void MainWindow::initShortcuts()
 {
     CtrlQ = new QShortcut(this);
     CtrlQ->setKey(Qt::CTRL + Qt::Key_Q);
-    connect(CtrlQ, SIGNAL(activated()), this, SLOT(closeFile()));
+    connect(CtrlQ, &QShortcut::activated, [=]() { files->closeFile(ui);});
 
     CtrlS = new QShortcut(this);
     CtrlS->setKey(Qt::CTRL + Qt::Key_S);
-    connect(CtrlS, SIGNAL(activated()), this, SLOT(saveFile()));
+    connect(CtrlS, &QShortcut::activated, [=]() { files->saveFile(ui);});
 
     CtrlN = new QShortcut(this);
     CtrlN->setKey(Qt::CTRL + Qt::Key_N);
-    connect(CtrlN, SIGNAL(activated()), this, SLOT(checkNewFile()));
+    connect(CtrlN, &QShortcut::activated, [=]() { files->checkNewFile(ui);});
 
     CtrlO = new QShortcut(this);
     CtrlO->setKey(Qt::CTRL + Qt::Key_O);
-    connect(CtrlO, SIGNAL(activated()), this, SLOT(checkOpenFile()));
+    connect(CtrlO, &QShortcut::activated, [=]() { files->checkOpenFile(ui);});
 }

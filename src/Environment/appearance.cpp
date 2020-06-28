@@ -1,19 +1,15 @@
-#include "src/core/mainwindow.hpp"
+#include "src/Core/mainwindow.hpp"
 #include "ui_mainwindow.h"
-#include <QDebug>
 
-void MainWindow::appearance(const QString &fileName)
+void MainWindow::initAppearance()
 {
-    setWindowTitle(fileName);
-    ui->statusBar->showMessage(fileName);
+    QFontMetrics metrics(font());
+    ui->TextEdit->setTabStopWidth(4 * metrics.width('a'));
+    this->setCentralWidget(ui->TextEdit);
 }
-
 
 void MainWindow::setCurrentFont()
 {
     QFont font = QFontDialog::getFont(nullptr, centralWidget()->font());
     centralWidget()->setFont(font);
-    this->config.font_name = font.family();
-    this->config.font_size = font.pointSize();
-    this->cfg->saveConfig(this->config);
 }

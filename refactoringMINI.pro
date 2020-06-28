@@ -8,7 +8,7 @@ CONFIG += c++11
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
+#DEFINES += QT_DEPRECATED_WARNINGS
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -16,25 +16,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-src/core/actions.cpp \
-src/core/main.cpp \
-src/core/mainwindow.cpp \
-src/core/actions.cpp \
+    src/Core/connects.cpp \
+    src/Core/file/file.cpp \
+    src/Core/main.cpp \
+    src/Core/mainwindow.cpp \
     src/Environment/appearance.cpp \
-    src/Environment/configurator.cpp \
     src/Environment/shortcuts.cpp \
     src/Environment/stylesheets.cpp \
-    src/Environment/themes.cpp \
     src/moduleSyntax/syntaxHighlighter.cpp \
 
 HEADERS += \
-src/core/mainwindow.hpp \
-    src/Environment/configurator.hpp \
-    src/Environment/themes.h \
+    src/Core/file/file.h \
+    src/Core/mainwindow.hpp \
     src/moduleSyntax/syntaxHighlighter.hpp \
 
 FORMS += \
-src/core/mainwindow.ui
+    src/Core/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
