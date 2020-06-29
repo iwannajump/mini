@@ -22,12 +22,13 @@ SOURCES += \
     src/Core/mainwindow.cpp \
     src/Environment/appearance.cpp \
     src/Environment/shortcuts.cpp \
-    src/Environment/stylesheets.cpp \
+    src/Environment/themes/schemes.cpp \
     src/moduleSyntax/syntaxHighlighter.cpp \
 
 HEADERS += \
     src/Core/file/file.h \
     src/Core/mainwindow.hpp \
+    src/Environment/themes/schemes.h \
     src/moduleSyntax/syntaxHighlighter.hpp \
 
 FORMS += \

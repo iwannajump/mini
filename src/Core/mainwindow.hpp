@@ -3,12 +3,13 @@
 #include <QMainWindow>
 #include <QShortcut>
 #include <QFontDialog>
+#include <ui_mainwindow.h>
+#include <src/Core/file/file.h>
+#include <src/Environment/themes/schemes.h>
 #include <src/moduleSyntax/syntaxHighlighter.hpp>
-#include "ui_mainwindow.h"
-#include "file/file.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; class File; }
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -20,21 +21,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void setColorSchemeLight();
-    void setColorSchemeDark();
-    void setColorSchemeSolarized();
     void setCurrentFont();
 
 private:
-    Ui::MainWindow * ui{};
     void initConnects();
     void initAppearance();
     void initShortcuts();
-    QShortcut * CtrlQ{}; //exit
-    QShortcut * CtrlS{}; //save
-    QShortcut * CtrlN{}; //new file
-    QShortcut * CtrlO{}; //open
-    QTextEdit * editor;
+    Ui::MainWindow * ui{};
     Highlighter * highlighter;
     Files * files = new Files;
+    Schemes * themes = new Schemes;
 };

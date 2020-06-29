@@ -49,14 +49,12 @@
      <property name="title">
       <string>Color scheme</string>
      </property>
-     <addaction name="actionlight"/>
-     <addaction name="actiondark"/>
-     <addaction name="actionsolarized"/>
+     <addaction name="actionLightScheme"/>
+     <addaction name="actionDarkScheme"/>
+     <addaction name="actionSolarizedTheme"/>
     </widget>
-    <addaction name="actionUndo_2"/>
-    <addaction name="actionRedo"/>
     <addaction name="menuColor_scheme"/>
-    <addaction name="QAChangeFont"/>
+    <addaction name="actionFont"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -140,22 +138,22 @@
     <string>Redo</string>
    </property>
   </action>
-  <action name="actionlight">
+  <action name="actionLightScheme">
    <property name="text">
     <string>light</string>
    </property>
   </action>
-  <action name="actiondark">
+  <action name="actionDarkScheme">
    <property name="text">
     <string>dark</string>
    </property>
   </action>
-  <action name="actionsolarized">
+  <action name="actionSolarizedTheme">
    <property name="text">
     <string>solarized</string>
    </property>
   </action>
-  <action name="QAChangeFont">
+  <action name="actionFont">
    <property name="text">
     <string>Font</string>
    </property>

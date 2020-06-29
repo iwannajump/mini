@@ -3,9 +3,11 @@
 
 void MainWindow::initAppearance()
 {
+    this->setCentralWidget(ui->TextEdit);
     QFontMetrics metrics(font());
     ui->TextEdit->setTabStopWidth(4 * metrics.width('a'));
-    this->setCentralWidget(ui->TextEdit);
+    highlighter = new Highlighter(ui->TextEdit->document());
+    highlighter->highlightBlock(ui->TextEdit->toPlainText());
 }
 
 void MainWindow::setCurrentFont()

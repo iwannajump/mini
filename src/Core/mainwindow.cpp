@@ -5,8 +5,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    highlighter = new Highlighter(ui->TextEdit->document());
-    highlighter->highlightBlock(ui->TextEdit->toPlainText());
     initAppearance();
     initConnects();
     initShortcuts();

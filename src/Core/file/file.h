@@ -1,9 +1,9 @@
 #pragma once
 
-#include <QFileDialog>
+#include <ui_mainwindow.h>
 #include <QMessageBox>
+#include <QFileDialog>
 #include <QTextStream>
-#include "ui_mainwindow.h"
 
 class Files : public QWidget
 {
@@ -19,6 +19,5 @@ public slots:
     void newFile(Ui::MainWindow * );
     void checkNewFile(Ui::MainWindow * );
     void closeFile(Ui::MainWindow * );
-
-     void appearance(Ui::MainWindow *, const QString &);
+    void appearance(Ui::MainWindow *, const QString &);
 };
