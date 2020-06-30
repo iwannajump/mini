@@ -3,9 +3,10 @@
 #include <QMainWindow>
 #include <QShortcut>
 #include <QFontDialog>
+#include <QTextEdit>
 #include <ui_mainwindow.h>
-#include <src/Core/file/file.h>
-#include <src/Environment/themes/schemes.h>
+#include <src/Core/file/file.hpp>
+#include <src/Environment/schemes/schemes.hpp>
 #include <src/moduleSyntax/syntaxHighlighter.hpp>
 
 QT_BEGIN_NAMESPACE
@@ -21,12 +22,15 @@ public:
     ~MainWindow();
 
 private slots:
-    void setCurrentFont();
+    void setupFont();
+    void zoomIn();
+    void zoomOut();
 
 private:
     void initConnects();
     void initAppearance();
     void initShortcuts();
+    void initHighlighter();
     Ui::MainWindow * ui{};
     Highlighter * highlighter;
     Files * files = new Files;

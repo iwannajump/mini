@@ -1,10 +1,5 @@
-#include "file.h"
+#include "file.hpp"
 #include "ui_mainwindow.h"
-
-Files::Files()
-{
-
-}
 
 void Files::saveFile(Ui::MainWindow * ui)
 {
@@ -164,10 +159,4 @@ void Files::appearance(Ui::MainWindow * ui, const QString &fileName)
     setWindowTitle(fileName);
     ui->statusBar->showMessage(fileName);
 }
-
-Files::~Files()
-{
-
-}
-
 

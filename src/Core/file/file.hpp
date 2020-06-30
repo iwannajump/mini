@@ -8,9 +8,6 @@
 class Files : public QWidget
 {
     Q_OBJECT
-public:
-    Files();
-    ~Files();
 
 public slots:
     void saveFile(Ui::MainWindow * );
@@ -19,5 +16,5 @@ public slots:
     void newFile(Ui::MainWindow * );
     void checkNewFile(Ui::MainWindow * );
     void closeFile(Ui::MainWindow * );
-    void appearance(Ui::MainWindow *, const QString &);
+    void appearance(Ui::MainWindow *, const QString & );
 };

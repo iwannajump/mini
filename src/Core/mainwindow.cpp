@@ -8,11 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
     initAppearance();
     initConnects();
     initShortcuts();
+    initHighlighter();    
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    delete highlighter;
+    delete themes;
     delete files;
+    delete highlighter;
+    delete ui;
 }

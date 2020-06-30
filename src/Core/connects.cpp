@@ -9,5 +9,5 @@ void MainWindow::initConnects()
     connect(ui->actionLightScheme,      &QAction::triggered, [=]() { themes->setColorSchemeLight(ui); });
     connect(ui->actionDarkScheme,       &QAction::triggered, [=]() { themes->setColorSchemeDark(ui); });
     connect(ui->actionSolarizedTheme,   &QAction::triggered, [=]() { themes->setColorSchemeSolarized(ui); });
-    connect(ui->actionFont,             &QAction::triggered, [=]() { setCurrentFont();});
+    connect(ui->actionFont,             &QAction::triggered, [=]() { setupFont(); });
 }

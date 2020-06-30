@@ -1,4 +1,4 @@
-#include "schemes.h"
+#include "schemes.hpp"
 
 struct Theme
 {
@@ -30,9 +30,9 @@ struct Theme
 
 void Schemes::setColorSchemeLight(Ui::MainWindow * ui)
 {
-    Theme::textEditStyle (ui, "#ffffff", "#f0f0f0", "#000000");
-    Theme::menuBarStyle  (ui, "#ffffff", "#f0f0f0", "#000000");
-    Theme::statusBarStyle(ui, "#ffffff", "#f0f0f0", "#000000");
+    Theme::textEditStyle (ui, "#ffffff", "#000000", "#000000");
+    Theme::menuBarStyle  (ui, "#ffffff", "#000000", "#000000");
+    Theme::statusBarStyle(ui, "#ffffff", "#000000", "#000000");
 }
 
 void Schemes::setColorSchemeDark(Ui::MainWindow * ui)
@@ -41,6 +41,7 @@ void Schemes::setColorSchemeDark(Ui::MainWindow * ui)
     Theme::menuBarStyle  (ui, "#0f0f0f", "#dadada", "#ffffff");
     Theme::statusBarStyle(ui, "#0f0f0f", "#839496", "#ffffff");
 }
+
 void Schemes::setColorSchemeSolarized(Ui::MainWindow * ui)
 {
     Theme::textEditStyle (ui, "#002b36", "#839496", "#ffffff");

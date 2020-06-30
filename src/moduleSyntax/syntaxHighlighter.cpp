@@ -1,8 +1,5 @@
 #include "src/moduleSyntax/syntaxHighlighter.hpp"
 #include "ui_mainwindow.h"
-#include <QRegularExpression>
-#include <QMap>
-
 
 Highlighter::Highlighter(QTextDocument *parent)
     : QSyntaxHighlighter(parent )
@@ -26,13 +23,6 @@ Highlighter::Highlighter(QTextDocument *parent)
         QString("\\bfalse\\b"), QString("\\btrue\\b"), QString("\\bnullptr\\b")
     };
 
-    for (const QString &pattern : keywordPatterns)
-    {
-        rule.pattern = QRegularExpression(pattern);
-        rule.format = keywordFormat;
-        highlightingRules.append(rule);
-    }
-
     dataTypeFormat.setForeground(QColor(65, 118, 130));
     const QString dataTypes[] =
     {
@@ -42,6 +32,12 @@ Highlighter::Highlighter(QTextDocument *parent)
         QString("\\bnamespace\\b")
     };
 
+    for (const QString &pattern : keywordPatterns)
+    {
+        rule.pattern = QRegularExpression(pattern);
+        rule.format = keywordFormat;
+        highlightingRules.append(rule);
+    }
 
     for (const QString &pattern : dataTypes)
     {
@@ -56,7 +52,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     classFormat.setForeground(Qt::darkMagenta);
-    rule.pattern = QRegularExpression(QString("#(endif|define|ifdef|ifndef|error|endif|include).*"));
+    rule.pattern = QRegularExpression(QString("#(endif|define|ifdef|ifndef|error|undef|include).*"));
     rule.format = classFormat;
     highlightingRules.append(rule);
 
