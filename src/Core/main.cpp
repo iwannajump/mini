@@ -1,10 +1,11 @@
-#include "mainwindow.hpp"
+#include "editor.hpp"
 #include <QApplication>
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.resize(800, 600);
-    w.show();
+    Editor editor;
+    editor.resize(800, 600);
+    editor.show();
     return QApplication::exec();
 }

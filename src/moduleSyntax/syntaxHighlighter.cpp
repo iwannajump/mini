@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 Highlighter::Highlighter(QTextDocument *parent)
-    : QSyntaxHighlighter(parent )
+    : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
 
@@ -73,44 +73,44 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     classFormat.setForeground(Qt::darkYellow);
-    rule.pattern = QRegularExpression(QString("\\<(?:\\\\<|.)*?\\>"));                             //<...>
+    rule.pattern = QRegularExpression(QString("\\<(?:\\\\<|.)*?\\>"));         //<...>
     rule.format = classFormat;
     highlightingRules.append(rule);
 
     classFormat.setForeground(Qt::darkYellow);
     rule.pattern = QRegularExpression(QString("->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|"));
-    rule.format = classFormat;                                                      //symbols
+    rule.format = classFormat;                                                 //symbols
     highlightingRules.append(rule);
 
     classFormat.setForeground(Qt::yellow);
-    rule.pattern = QRegularExpression(QString("^(\\w+):($|[\\s{1,}])$"));           //tryexec: (goto label)
+    rule.pattern = QRegularExpression(QString("^(\\w+):($|[\\s{1,}])$"));      //tryexec: (goto label)
     rule.format = classFormat;
     highlightingRules.append(rule);
 
     quotationFormat.setForeground(Qt::darkGreen);
-    rule.pattern = QRegularExpression(QString("[0-9]"));                            //123456789
+    rule.pattern = QRegularExpression(QString("[0-9]"));                       //123456789
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     quotationFormat.setForeground(QColor(115, 200, 130));    //mint
-    rule.pattern = QRegularExpression(QString("\"(?:\\\"|.)*?\""));                  //"text"
+    rule.pattern = QRegularExpression(QString("\"(?:\\\"|.)*?\""));             //"text"
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     quotationFormat.setForeground(QColor(115, 200, 130));   //mint
-    rule.pattern = QRegularExpression(QString("\'(?:\\\'|.)*?\'"));                 //'text'
+    rule.pattern = QRegularExpression(QString("\'(?:\\\'|.)*?\'"));            //'text'
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     singleLineCommentFormat.setForeground(Qt::darkGray);
-    rule.pattern = QRegularExpression(QString("//.*"));                             //single line comment
+    rule.pattern = QRegularExpression(QString("//.*"));                        //single line comment
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
 
     multiLineCommentFormat.setForeground(Qt::darkGray);
 
     commentStartExpression = QRegularExpression(QString("/\\*"));
-    commentEndExpression = QRegularExpression(QString("\\*/"));                     //multiline comment
+    commentEndExpression = QRegularExpression(QString("\\*/"));                //multiline comment
 }
 
 void Highlighter::highlightBlock(const QString &text)

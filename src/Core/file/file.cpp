@@ -1,7 +1,7 @@
 #include "file.hpp"
 #include "ui_mainwindow.h"
 
-void Files::saveFile(Ui::MainWindow * ui)
+void Files::saveFile(Ui::Editor * ui)
 {
     ui->actionSave->setToolTip("Saving file");
 
@@ -34,8 +34,7 @@ void Files::saveFile(Ui::MainWindow * ui)
     }
 }
 
-
-void Files::openFile(Ui::MainWindow * ui)
+void Files::openFile(Ui::Editor * ui)
 {
     ui->actionOpen->setToolTip("Open file");
 
@@ -68,7 +67,7 @@ void Files::openFile(Ui::MainWindow * ui)
 }
 
 
-void Files::checkOpenFile(Ui::MainWindow * ui)
+void Files::checkOpenFile(Ui::Editor * ui)
 {
     if (!(ui->TextEdit->toPlainText().isEmpty()))
     {
@@ -86,8 +85,7 @@ void Files::checkOpenFile(Ui::MainWindow * ui)
     else openFile(ui);
 }
 
-
-void Files::newFile(Ui::MainWindow * ui)
+void Files::newFile(Ui::Editor * ui)
 {
     QString fileName =
     QFileDialog::getSaveFileName
@@ -118,8 +116,7 @@ void Files::newFile(Ui::MainWindow * ui)
     file.close();
 }
 
-
-void Files::checkNewFile(Ui::MainWindow * ui)
+void Files::checkNewFile(Ui::Editor * ui)
 {
     if (!(ui->TextEdit->toPlainText().isEmpty()))
     {
@@ -136,8 +133,7 @@ void Files::checkNewFile(Ui::MainWindow * ui)
     else newFile(ui);
 }
 
-
-void Files::closeFile(Ui::MainWindow * ui)
+void Files::closeFile(Ui::Editor * ui, QWidget * parent)
 {
     if (!(ui->TextEdit->toPlainText().isEmpty()))
     {
@@ -149,12 +145,12 @@ void Files::closeFile(Ui::MainWindow * ui)
         {
             saveFile(ui);
         }
-        close();
+        parent->close();
     }
-    else close();
+    else parent->close();
 }
 
-void Files::appearance(Ui::MainWindow * ui, const QString &fileName)
+void Files::appearance(Ui::Editor * ui, const QString &fileName)
 {
     setWindowTitle(fileName);
     ui->statusBar->showMessage(fileName);

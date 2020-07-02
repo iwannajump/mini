@@ -10,11 +10,11 @@ class Files : public QWidget
     Q_OBJECT
 
 public slots:
-    void saveFile(Ui::MainWindow * );
-    void openFile(Ui::MainWindow * );
-    void checkOpenFile(Ui::MainWindow * );
-    void newFile(Ui::MainWindow * );
-    void checkNewFile(Ui::MainWindow * );
-    void closeFile(Ui::MainWindow * );
-    void appearance(Ui::MainWindow *, const QString & );
+    void saveFile(Ui::Editor * );
+    void openFile(Ui::Editor * );
+    void checkOpenFile(Ui::Editor * );
+    void newFile(Ui::Editor * );
+    void checkNewFile(Ui::Editor * );
+    void closeFile(Ui::Editor *, QWidget * );
+    void appearance(Ui::Editor *, const QString & );
 };

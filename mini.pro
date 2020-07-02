@@ -16,23 +16,24 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/Core/connects.cpp \
-    src/Core/file/file.cpp \
-    src/Core/main.cpp \
-    src/Core/mainwindow.cpp \
-    src/Environment/appearance.cpp \
-    src/Environment/shortcuts.cpp \
-    src/Environment/themes/schemes.cpp \
-    src/moduleSyntax/syntaxHighlighter.cpp \
+    src/Core/connects.cpp                   \
+    src/Core/editor.cpp                     \
+    src/Core/file/file.cpp                  \
+    src/Core/main.cpp                       \
+    src/Core/settings.cpp                   \
+    src/Environment/appearance.cpp          \
+    src/Environment/shortcuts.cpp           \
+    src/Environment/schemes/schemes.cpp     \
+    src/moduleSyntax/syntaxHighlighter.cpp  \
 
 HEADERS += \
-    src/Core/file/file.h \
-    src/Core/mainwindow.hpp \
-    src/Environment/themes/schemes.h \
-    src/moduleSyntax/syntaxHighlighter.hpp \
+    src/Core/editor.hpp                     \
+    src/Core/file/file.hpp                  \
+    src/Environment/schemes/schemes.hpp     \
+    src/moduleSyntax/syntaxHighlighter.hpp  \
 
 FORMS += \
-    src/Core/mainwindow.ui
+    src/Core/editor.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

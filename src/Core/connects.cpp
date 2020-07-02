@@ -1,8 +1,8 @@
-#include "mainwindow.hpp"
+#include "editor.hpp"
 
-void MainWindow::initConnects()
+void Editor::initConnects(QWidget * parent)
 {
-    connect(ui->actionExit,             &QAction::triggered, [=]() { files->closeFile(ui); });
+    connect(ui->actionExit,             &QAction::triggered, [=]() { files->closeFile(ui, parent); });
     connect(ui->actionSave,             &QAction::triggered, [=]() { files->saveFile(ui); });
     connect(ui->actionNew,              &QAction::triggered, [=]() { files->checkNewFile(ui); });
     connect(ui->actionOpen,             &QAction::triggered, [=]() { files->checkOpenFile(ui); });

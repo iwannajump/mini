@@ -8,7 +8,7 @@ class Schemes : public QObject
     Q_OBJECT
 
 public slots:
-    void setColorSchemeLight(Ui::MainWindow * );
-    void setColorSchemeDark(Ui::MainWindow * );
-    void setColorSchemeSolarized(Ui::MainWindow * );
+    void setColorSchemeLight(Ui::Editor * );
+    void setColorSchemeDark(Ui::Editor * );
+    void setColorSchemeSolarized(Ui::Editor * );
 };

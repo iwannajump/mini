@@ -4,22 +4,23 @@
 #include <QShortcut>
 #include <QFontDialog>
 #include <QTextEdit>
+#include <QSettings>
 #include <ui_mainwindow.h>
 #include <src/Core/file/file.hpp>
 #include <src/Environment/schemes/schemes.hpp>
 #include <src/moduleSyntax/syntaxHighlighter.hpp>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class Editor; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class Editor : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit Editor(QWidget *parent = nullptr);
+    ~Editor();
 
 private slots:
     void setupFont();
@@ -27,12 +28,15 @@ private slots:
     void zoomOut();
 
 private:
-    void initConnects();
+    void saveSettings();
+    void loadSettings();
+    void initConnects(QWidget * );
     void initAppearance();
-    void initShortcuts();
+    void initShortcuts(QWidget *);
     void initHighlighter();
-    Ui::MainWindow * ui{};
+    Ui::Editor * ui{};
     Highlighter * highlighter;
     Files * files = new Files;
     Schemes * themes = new Schemes;
+    QSettings * settings = new QSettings("mini", "mini", this);
 };

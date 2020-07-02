@@ -1,8 +1,8 @@
 #include "ui_mainwindow.h"
-#include "src/Core/mainwindow.hpp"
+#include "src/Core/editor.hpp"
 
 
-void MainWindow::initShortcuts()
+void Editor::initShortcuts(QWidget * parent)
 {
     QShortcut * CtrlQ{}; //exit
     QShortcut * CtrlS{}; //save
@@ -13,7 +13,7 @@ void MainWindow::initShortcuts()
 
     CtrlQ = new QShortcut(this);
     CtrlQ->setKey(Qt::CTRL + Qt::Key_Q);
-    connect(CtrlQ, &QShortcut::activated,   [=]() { files->closeFile(ui); });
+    connect(CtrlQ, &QShortcut::activated,   [=]() { files->closeFile(ui, parent); });
 
     CtrlS = new QShortcut(this);
     CtrlS->setKey(Qt::CTRL + Qt::Key_S);
