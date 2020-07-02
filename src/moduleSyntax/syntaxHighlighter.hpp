@@ -21,15 +21,12 @@ private:
         QTextCharFormat format;
     };
 
+    void HighlightLexeme(HighlightingRule rule, QColor color, QString regexp);
+
     QVector<HighlightingRule> highlightingRules;
     QRegularExpression commentStartExpression;
     QRegularExpression commentEndExpression;
-    QTextCharFormat keywordFormat;
-    QTextCharFormat dataTypeFormat;
-    QTextCharFormat classFormat;
-    QTextCharFormat singleLineCommentFormat;
     QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;
-    QTextCharFormat functionFormat;
 };
 
