@@ -11,16 +11,15 @@ Highlighter::Highlighter(QTextDocument *parent)
     {
         "\\bclass\\b",      "\\bconst\\b",      "\\benum\\b",
         "\\bexplicit\\b",   "\\bfriend\\b",     "\\binline\\b",
-        "\\boperator\\b",   "\\bprivate\\b",    "\\bgoto\\b",
-        "\\bprotected\\b",  "\\bpublic\\b",     "\\bsignals\\b",
+        "\\boperator\\b",   "\\bgoto\\b",       "\\bsignals\\b",
         "\\bsigned\\b",     "\\bslots\\b",      "\\bstatic\\b",
         "\\btypedef\\b",    "\\btypename\\b",   "\\bunion\\b",
-        "\\bunsigned\\b",   "\\bvirtual\\b",    "\\bvolatile\\b",
-        "\\busing\\b",      "\\bif\\b",         "\\belse\\b",
-        "\\belif\\b",       "\\bwhile\\b",      "\\busing\\b",
-        "\\boverride\\b",   "\\bnullptr\\b",    "\\bNULL\\b",
-        "\\bfor\\b",        "\\breturn\\b",     "\\bthis\\b",
-        "\\bfalse\\b",      "\\btrue\\b",       "\\bnullptr\\b"
+        "\\bunsigned\\b",   "\\bvolatile\\b",   "\\busing\\b",
+        "\\bif\\b",         "\\belse\\b",       "\\belif\\b",
+        "\\bwhile\\b",      "\\busing\\b",      "\\boverride\\b",
+        "\\bnullptr\\b",    "\\bNULL\\b",       "\\bfor\\b",
+        "\\breturn\\b",     "\\bthis\\b",       "\\bfalse\\b",
+        "\\btrue\\b",       "\\bnullptr\\b"
     };
 
     quotationFormat.setForeground(QColor(65, 118, 130));
@@ -30,6 +29,13 @@ Highlighter::Highlighter(QTextDocument *parent)
         "\\blong\\b",       "\\bshort\\b",      "\\bstruct\\b",
         "\\btemplate\\b",   "\\bvoid\\b",       "\\bbool\\b",
         "\\bnamespace\\b"
+    };
+
+    quotationFormat.setForeground(QColor(115, 160, 155));
+    const QString accessModifiers[]
+    {
+        "\\bprotected\\b",  "\\bpublic\\b",     "\\bvirtual\\b",
+        "\\bprivate\\b"
     };
 
     for (const QString &pattern : keywordPatterns)
@@ -46,33 +52,29 @@ Highlighter::Highlighter(QTextDocument *parent)
         highlightingRules.append(rule);
     }
 
+    for (const QString &pattern : accessModifiers)
+    {
+        rule.pattern = QRegularExpression(pattern);
+        rule.format = quotationFormat;
+        highlightingRules.append(rule);
+    }
+
+    HighlightLexeme(rule, QColor(178, 150, 0),  "\\bmain\\b");
     HighlightLexeme(rule, QColor(52, 80, 110),  "\\bQ[A-Za-z]+\\b");    //"text"
-
     HighlightLexeme(rule, QColor(115, 200, 130),"\"(?:\\\"|.)*?\"");    //"text"
-
-    HighlightLexeme(rule, QColor(115, 200, 130), "  \'(?:\\\'|.)*?\'");   //'text'
-
-    HighlightLexeme(rule, QColor(178, 150, 0), "\\bmain\\b");
-
-    HighlightLexeme(rule, Qt::darkYellow, "->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|&"); //symbols
-
-    HighlightLexeme(rule, Qt::darkYellow, "\\<(?:\\\\<|.)*?\\>");       //<...>
-
-    HighlightLexeme(rule, Qt::yellow, "^(\\w+):($|[\\s{1,}])$");        //tryexec: (goto label)
-
-    HighlightLexeme(rule, Qt::darkGreen, "[0-9]");
-
-    HighlightLexeme(rule, Qt::darkMagenta, "#(endif|define|ifdef|ifndef|error|undef|include).*");
-
-    HighlightLexeme(rule, Qt::darkMagenta, "<<|>>");
-
-    HighlightLexeme(rule, Qt::darkMagenta, "#pragma\\b");
-
-    HighlightLexeme(rule, Qt::darkGray, "//.*");
-
+    HighlightLexeme(rule, QColor(115, 200, 130),"\'(?:\\\'|.)*?\'");   //'text'
+    HighlightLexeme(rule, QColor(115, 160, 155),"^(\\w+):($|[\\s{1,}])$");        //tryexec: (goto label)
+    HighlightLexeme(rule, Qt::darkYellow,       "->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|&"); //symbols
+    HighlightLexeme(rule, Qt::darkYellow,       "\\<(?:\\\\<|.)*?\\>");       //<...>
+    HighlightLexeme(rule, Qt::darkMagenta,      "#(endif|define|ifdef|ifndef|error|undef|include).*");
+    HighlightLexeme(rule, Qt::darkMagenta,      "#pragma\\b");
+    HighlightLexeme(rule, Qt::darkMagenta,      "<<|>>");
+    HighlightLexeme(rule, Qt::darkGray,         "//.*");
+    HighlightLexeme(rule, Qt::darkGreen,        "[0-9]");
     multiLineCommentFormat.setForeground(Qt::darkGray);
 
     commentStartExpression = QRegularExpression(QString("/\\*"));
+
     commentEndExpression = QRegularExpression(QString("\\*/"));
 }
 
