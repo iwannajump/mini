@@ -6,114 +6,87 @@ Highlighter::Highlighter(QTextDocument *parent)
 {
     HighlightingRule rule;
 
-    keywordFormat.setForeground(QColor(125, 65, 130));
+    quotationFormat.setForeground(QColor(125, 65, 130));
     const QString keywordPatterns[] =
     {
-        QString("\\bclass\\b"), QString("\\bconst\\b"), QString("\\benum\\b"),
-        QString("\\bexplicit\\b"), QString("\\bfriend\\b"), QString("\\binline\\b"),
-        QString("\\boperator\\b"), QString("\\bprivate\\b"), QString("\\bgoto\\b"),
-        QString("\\bprotected\\b"), QString("\\bpublic\\b"), QString("\\bsignals\\b"),
-        QString("\\bsigned\\b"), QString("\\bslots\\b"), QString("\\bstatic\\b"),
-        QString("\\btypedef\\b"), QString("\\btypename\\b"), QString("\\bunion\\b"),
-        QString("\\bunsigned\\b"), QString("\\bvirtual\\b"), QString("\\bvolatile\\b"),
-        QString("\\busing\\b"), QString("\\bif\\b"), QString("\\belse\\b"),
-        QString("\\belif\\b"), QString("\\bwhile\\b"), QString("\\busing\\b"),
-        QString("\\boverride\\b"), QString("\\bnullptr\\b"), QString("\\bNULL\\b"),
-        QString("\\bfor\\b"), QString("\\breturn\\b"), QString("\\bthis\\b"),
-        QString("\\bfalse\\b"), QString("\\btrue\\b"), QString("\\bnullptr\\b")
+        "\\bclass\\b",      "\\bconst\\b",      "\\benum\\b",
+        "\\bexplicit\\b",   "\\bfriend\\b",     "\\binline\\b",
+        "\\boperator\\b",   "\\bprivate\\b",    "\\bgoto\\b",
+        "\\bprotected\\b",  "\\bpublic\\b",     "\\bsignals\\b",
+        "\\bsigned\\b",     "\\bslots\\b",      "\\bstatic\\b",
+        "\\btypedef\\b",    "\\btypename\\b",   "\\bunion\\b",
+        "\\bunsigned\\b",   "\\bvirtual\\b",    "\\bvolatile\\b",
+        "\\busing\\b",      "\\bif\\b",         "\\belse\\b",
+        "\\belif\\b",       "\\bwhile\\b",      "\\busing\\b",
+        "\\boverride\\b",   "\\bnullptr\\b",    "\\bNULL\\b",
+        "\\bfor\\b",        "\\breturn\\b",     "\\bthis\\b",
+        "\\bfalse\\b",      "\\btrue\\b",       "\\bnullptr\\b"
     };
 
-    dataTypeFormat.setForeground(QColor(65, 118, 130));
+    quotationFormat.setForeground(QColor(65, 118, 130));
     const QString dataTypes[] =
     {
-        QString("\\bchar\\b"), QString("\\bdouble\\b"), QString("\\bint\\b"),
-        QString("\\blong\\b"), QString("\\bshort\\b"), QString("\\bstruct\\b"),
-        QString("\\btemplate\\b"), QString("\\bvoid\\b"), QString("\\bbool\\b"),
-        QString("\\bnamespace\\b")
+        "\\bchar\\b",       "\\bdouble\\b",     "\\bint\\b",
+        "\\blong\\b",       "\\bshort\\b",      "\\bstruct\\b",
+        "\\btemplate\\b",   "\\bvoid\\b",       "\\bbool\\b",
+        "\\bnamespace\\b"
     };
 
     for (const QString &pattern : keywordPatterns)
     {
         rule.pattern = QRegularExpression(pattern);
-        rule.format = keywordFormat;
+        rule.format = quotationFormat;
         highlightingRules.append(rule);
     }
 
     for (const QString &pattern : dataTypes)
     {
         rule.pattern = QRegularExpression(pattern);
-        rule.format = dataTypeFormat;
+        rule.format = quotationFormat;
         highlightingRules.append(rule);
     }
 
-    classFormat.setForeground(QColor(52, 80, 110));
-    rule.pattern = QRegularExpression(QString("\\bQ[A-Za-z]+\\b"));                 //Q....
-    rule.format = classFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, QColor(52, 80, 110),  "\\bQ[A-Za-z]+\\b");    //"text"
 
-    classFormat.setForeground(Qt::darkMagenta);
-    rule.pattern = QRegularExpression(QString("#(endif|define|ifdef|ifndef|error|undef|include).*"));
-    rule.format = classFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, QColor(115, 200, 130),"\"(?:\\\"|.)*?\"");    //"text"
 
-    quotationFormat.setForeground(Qt::lightGray);
-    rule.pattern = QRegularExpression(QString("<<|>>"));
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, QColor(115, 200, 130), "  \'(?:\\\'|.)*?\'");   //'text'
 
-    quotationFormat.setForeground(Qt::darkMagenta);
-    rule.pattern = QRegularExpression(QString("#pragma\\b"));
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, QColor(178, 150, 0), "\\bmain\\b");
 
-    quotationFormat.setFontWeight(2);
-    quotationFormat.setForeground(QColor(178, 150, 0)); //gold
-    rule.pattern = QRegularExpression(QString("\\bmain\\b"));
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkYellow, "->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|&"); //symbols
 
-    classFormat.setForeground(Qt::darkYellow);
-    rule.pattern = QRegularExpression(QString("\\<(?:\\\\<|.)*?\\>"));         //<...>
-    rule.format = classFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkYellow, "\\<(?:\\\\<|.)*?\\>");       //<...>
 
-    classFormat.setForeground(Qt::darkYellow);
-    rule.pattern = QRegularExpression(QString("->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|"));
-    rule.format = classFormat;                                                 //symbols
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::yellow, "^(\\w+):($|[\\s{1,}])$");        //tryexec: (goto label)
 
-    classFormat.setForeground(Qt::yellow);
-    rule.pattern = QRegularExpression(QString("^(\\w+):($|[\\s{1,}])$"));      //tryexec: (goto label)
-    rule.format = classFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkGreen, "[0-9]");
 
-    quotationFormat.setForeground(Qt::darkGreen);
-    rule.pattern = QRegularExpression(QString("[0-9]"));                       //123456789
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkMagenta, "#(endif|define|ifdef|ifndef|error|undef|include).*");
 
-    quotationFormat.setForeground(QColor(115, 200, 130));    //mint
-    rule.pattern = QRegularExpression(QString("\"(?:\\\"|.)*?\""));             //"text"
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkMagenta, "<<|>>");
 
-    quotationFormat.setForeground(QColor(115, 200, 130));   //mint
-    rule.pattern = QRegularExpression(QString("\'(?:\\\'|.)*?\'"));            //'text'
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkMagenta, "#pragma\\b");
 
-    singleLineCommentFormat.setForeground(Qt::darkGray);
-    rule.pattern = QRegularExpression(QString("//.*"));                        //single line comment
-    rule.format = singleLineCommentFormat;
-    highlightingRules.append(rule);
+    HighlightLexeme(rule, Qt::darkGray, "//.*");
 
     multiLineCommentFormat.setForeground(Qt::darkGray);
 
     commentStartExpression = QRegularExpression(QString("/\\*"));
-    commentEndExpression = QRegularExpression(QString("\\*/"));                //multiline comment
+    commentEndExpression = QRegularExpression(QString("\\*/"));
 }
 
-void Highlighter::highlightBlock(const QString &text)
+void Highlighter::HighlightLexeme
+    (HighlightingRule rule, QColor color, QString regexp)
+{
+    quotationFormat.setForeground(color);
+    rule.pattern = QRegularExpression(QString(regexp));
+    rule.format = quotationFormat;
+    highlightingRules.append(rule);
+}
+
+void Highlighter::highlightBlock
+    (const QString &text)
 {
     for (const HighlightingRule &rule : qAsConst(highlightingRules))
     {
@@ -149,4 +122,3 @@ void Highlighter::highlightBlock(const QString &text)
         startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
     }
 }
-
