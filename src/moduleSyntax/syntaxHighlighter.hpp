@@ -1,10 +1,7 @@
 #pragma once
 
 #include <QSyntaxHighlighter>
-#include <QMap>
-#include <QPlainTextEdit>
 #include <QRegularExpression>
-#include <QTextEdit>
 
 class Highlighter : public QSyntaxHighlighter
 {
@@ -20,9 +17,7 @@ private:
         QRegularExpression pattern;
         QTextCharFormat format;
     };
-
     void HighlightLexeme(HighlightingRule rule, QColor color, QString regexp);
-
     QVector<HighlightingRule> highlightingRules;
     QRegularExpression commentStartExpression;
     QRegularExpression commentEndExpression;

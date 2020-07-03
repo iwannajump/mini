@@ -60,10 +60,10 @@ Highlighter::Highlighter(QTextDocument *parent)
     }
 
     HighlightLexeme(rule, QColor(178, 150, 0),  "\\bmain\\b");
-    HighlightLexeme(rule, QColor(52, 80, 110),  "\\bQ[A-Za-z]+\\b");    //"text"
+    HighlightLexeme(rule, QColor(52, 80, 110),  "\\bQ[A-Za-z]+\\b");    //Qt classes
     HighlightLexeme(rule, QColor(115, 200, 130),"\"(?:\\\"|.)*?\"");    //"text"
     HighlightLexeme(rule, QColor(115, 200, 130),"\'(?:\\\'|.)*?\'");   //'text'
-    HighlightLexeme(rule, QColor(115, 160, 155),"^(\\w+):($|[\\s{1,}])$");        //tryexec: (goto label)
+    HighlightLexeme(rule, QColor(115, 160, 155),"^(\\w+):$");        //tryexec: (goto label)
     HighlightLexeme(rule, Qt::darkYellow,       "->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|&"); //symbols
     HighlightLexeme(rule, Qt::darkYellow,       "\\<(?:\\\\<|.)*?\\>");       //<...>
     HighlightLexeme(rule, Qt::darkMagenta,      "#(endif|define|ifdef|ifndef|error|undef|include).*");
@@ -71,11 +71,12 @@ Highlighter::Highlighter(QTextDocument *parent)
     HighlightLexeme(rule, Qt::darkMagenta,      "<<|>>");
     HighlightLexeme(rule, Qt::darkGray,         "//.*");
     HighlightLexeme(rule, Qt::darkGreen,        "[0-9]");
-    multiLineCommentFormat.setForeground(Qt::darkGray);
 
     commentStartExpression = QRegularExpression(QString("/\\*"));
 
     commentEndExpression = QRegularExpression(QString("\\*/"));
+
+    multiLineCommentFormat.setForeground(Qt::darkGray);
 }
 
 void Highlighter::HighlightLexeme

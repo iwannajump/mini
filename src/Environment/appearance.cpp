@@ -20,12 +20,6 @@ void Editor::setupFont()
     centralWidget()->setFont(font);
 }
 
-void Editor::zoomIn()
-{
-    ui->TextEdit->zoomIn(5);
-}
+void Editor::zoomIn() { ui->TextEdit->zoomIn(5); }
 
-void Editor::zoomOut()
-{
-    ui->TextEdit->zoomOut(5);
-}
+void Editor::zoomOut() { ui->TextEdit->zoomOut(5); }

@@ -2,7 +2,8 @@
 #include "src/Core/editor.hpp"
 
 
-void Editor::initShortcuts(QWidget * parent)
+void Editor::initShortcuts
+    (QWidget * parent)
 {
     QShortcut * CtrlQ{}; //exit
     QShortcut * CtrlS{}; //save

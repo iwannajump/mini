@@ -1,5 +1,4 @@
 #include "file.hpp"
-#include "ui_mainwindow.h"
 
 void Files::saveFile(Ui::Editor * ui)
 {
@@ -41,7 +40,7 @@ void Files::openFile(Ui::Editor * ui)
     QString fileName =
     QFileDialog::getOpenFileName
     (
-    this, tr("Save file"), "",
+    this, tr("Open file"), "",
     tr("Text file (*.txt);;"
        "Bash script (*.sh);;"
        "Makefile;;"
@@ -90,7 +89,7 @@ void Files::newFile(Ui::Editor * ui)
     QString fileName =
     QFileDialog::getSaveFileName
     (
-    this, tr("Save file"), "",
+    this, tr("New file"), "",
     tr("Text file (*.txt);;"
        "Bash script (*.sh);;"
        "Makefile;;"

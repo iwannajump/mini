@@ -5,7 +5,6 @@
 #include <QFontDialog>
 #include <QTextEdit>
 #include <QSettings>
-#include <ui_mainwindow.h>
 #include <src/Core/file/file.hpp>
 #include <src/Environment/schemes/schemes.hpp>
 #include <src/moduleSyntax/syntaxHighlighter.hpp>
@@ -30,10 +29,10 @@ private slots:
 private:
     void saveSettings();
     void loadSettings();
-    void initConnects(QWidget * );
     void initAppearance();
-    void initShortcuts(QWidget *);
     void initHighlighter();
+    void initConnects(QWidget * );
+    void initShortcuts(QWidget * );
     Ui::Editor * ui{};
     Highlighter * highlighter;
     Files * files = new Files;
