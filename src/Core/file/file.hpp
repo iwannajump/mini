@@ -1,6 +1,7 @@
 #pragma once
 
-#include <ui_mainwindow.h>
+//#include <ui_mainwindow.h>
+#include <ui_editor.h>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QTextStream>

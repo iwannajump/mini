@@ -1,6 +1,7 @@
 #pragma once
 
-#include <ui_mainwindow.h>
+//#include <ui_mainwindow.h>
+#include <ui_editor.h>
 
 class Schemes : public QObject
 {

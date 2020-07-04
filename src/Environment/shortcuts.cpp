@@ -1,4 +1,3 @@
-#include "ui_mainwindow.h"
 #include "src/Core/editor.hpp"
 
 
