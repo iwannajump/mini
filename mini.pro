@@ -24,7 +24,7 @@ SOURCES += \
     src/Environment/appearance.cpp          \
     src/Environment/shortcuts.cpp           \
     src/Environment/schemes/schemes.cpp     \
-    src/moduleSyntax/cppHighlighter.cpp \
+    src/moduleSyntax/cppHighlighter.cpp     \
     src/moduleSyntax/syntaxHighlighter.cpp  \
 
 HEADERS += \

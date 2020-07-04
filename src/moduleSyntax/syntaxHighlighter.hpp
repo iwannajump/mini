@@ -8,8 +8,8 @@ class Highlighter : public QSyntaxHighlighter
     Q_OBJECT
 
 public:
-    explicit Highlighter(QTextDocument *parent = 0);
-    void highlightBlock(const QString &text) override;
+    explicit Highlighter(QTextDocument * parent = 0);
+    void highlightBlock(const QString & text) override;
     void cppHighlight();
 
 private:
@@ -25,7 +25,7 @@ private:
     QTextCharFormat dataTypeFormat;
     QTextCharFormat accessModifierFormat;
     QTextCharFormat keywordFormat;
-    QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;
+    QTextCharFormat multiLineCommentFormat;
 };
 

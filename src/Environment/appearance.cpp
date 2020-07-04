@@ -11,7 +11,6 @@ void Editor::initHighlighter()
 {
     highlighter = new Highlighter(ui->textEdit->document());
     highlighter->cppHighlight();
-    highlighter->highlightBlock(ui->textEdit->toPlainText());
 }
 
 void Editor::setupFont()

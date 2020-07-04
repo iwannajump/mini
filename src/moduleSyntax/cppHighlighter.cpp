@@ -19,7 +19,7 @@ void Highlighter::cppHighlight()
         "\\breturn\\b",     "\\bthis\\b",       "\\bfalse\\b",
     };
 
-    dataTypeFormat.setForeground(QColor(65, 118, 0));
+    dataTypeFormat.setForeground(QColor(100, 150, 90));
     const QString dataTypes[] =
     {
         "\\bchar\\b",       "\\bdouble\\b",     "\\bint\\b",
@@ -56,18 +56,18 @@ void Highlighter::cppHighlight()
         highlightingRules.append(rule);
     }
 
-    HighlightLexeme(rule, QColor(178, 150, 0),  "\\bmain\\b");
-    HighlightLexeme(rule, QColor(52, 80, 110),  "\\bQ[A-Za-z]+\\b");    //Qt classes
+    HighlightLexeme(rule, Qt::yellow,           "[0-9]");
+    HighlightLexeme(rule, Qt::darkMagenta,      "<<|>>");
+    HighlightLexeme(rule, Qt::darkMagenta,      "#pragma\\b");
+    HighlightLexeme(rule, Qt::darkMagenta,      "#(endif|define|ifdef|ifndef|error|undef|include).*");
+    HighlightLexeme(rule, Qt::darkYellow,       "\\.|,|<|>|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|&"); //symbols
+    HighlightLexeme(rule, Qt::darkYellow,       "\\<(?:\\\\<|.)*?\\>");   //<...>
+    HighlightLexeme(rule, QColor(115, 160, 155),"^(\\w+):$");            //tryexec: (goto label)
     HighlightLexeme(rule, QColor(115, 200, 130),"\"(?:\\\"|.)*?\"");    //"text"
     HighlightLexeme(rule, QColor(115, 200, 130),"\'(?:\\\'|.)*?\'");   //'text'
-    HighlightLexeme(rule, QColor(115, 160, 155),"^(\\w+):$");        //tryexec: (goto label)
-    HighlightLexeme(rule, Qt::darkYellow,       "->|\\.|,|<|\\/|\\+|\\*|-|=|;|:|\\||!|~|\\^|%|&"); //symbols
-    HighlightLexeme(rule, Qt::darkYellow,       "\\<(?:\\\\<|.)*?\\>");       //<...>
-    HighlightLexeme(rule, Qt::darkMagenta,      "#(endif|define|ifdef|ifndef|error|undef|include).*");
-    HighlightLexeme(rule, Qt::darkMagenta,      "#pragma\\b");
-    HighlightLexeme(rule, Qt::darkMagenta,      "<<|>>");
-    HighlightLexeme(rule, Qt::darkGray,         "//.*");
-    HighlightLexeme(rule, Qt::darkGreen,        "[0-9]");
+    HighlightLexeme(rule, QColor(150, 150, 150),"//.*");
+    HighlightLexeme(rule, QColor(52,  80,  110),"\\bQ[A-Za-z]+\\b");    //Qt classes
+    HighlightLexeme(rule, QColor(178, 150, 0),  "\\bmain\\b");
 
     commentStartExpression = QRegularExpression("/\\*");
 

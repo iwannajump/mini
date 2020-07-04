@@ -11,6 +11,8 @@ void Editor::saveSettings()
             (settings.value("stylesheet/menubar", QString()).value<QString>());
     ui->statusBar->setStyleSheet
             (settings.value("stylesheet/statusbar", QString()).value<QString>());
+    ui->textEdit->setPlainText
+            (settings.value("file", QString()).value<QString>());
 }
 
 void Editor::loadSettings()
@@ -24,4 +26,6 @@ void Editor::loadSettings()
             ("stylesheet/menubar", ui->menuBar->styleSheet());
     settings.setValue
             ("stylesheet/statusbar", ui->statusBar->styleSheet());
+    settings.setValue
+            ("file", ui->textEdit->toPlainText());
 }
