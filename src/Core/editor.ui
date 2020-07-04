@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QPlainTextEdit" name="TextEdit"/>
+     <widget class="QPlainTextEdit" name="textEdit"/>
     </item>
    </layout>
   </widget>
@@ -45,7 +45,7 @@
     <property name="title">
      <string>Edit</string>
     </property>
-    <widget class="QMenu" name="menuColor_scheme">
+    <widget class="QMenu" name="menuColorScheme">
      <property name="title">
       <string>Color scheme</string>
      </property>
@@ -53,7 +53,7 @@
      <addaction name="actionDarkScheme"/>
      <addaction name="actionSolarizedTheme"/>
     </widget>
-    <addaction name="menuColor_scheme"/>
+    <addaction name="menuColorScheme"/>
     <addaction name="actionFont"/>
    </widget>
    <widget class="QMenu" name="menuHelp">

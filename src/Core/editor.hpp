@@ -10,7 +10,7 @@
 #include <src/moduleSyntax/syntaxHighlighter.hpp>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Editor; }
+namespace Ui { class Editor; class Files; }
 QT_END_NAMESPACE
 
 class Editor : public QMainWindow

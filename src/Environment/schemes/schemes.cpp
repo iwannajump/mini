@@ -5,7 +5,7 @@ struct Theme
     static void textEditStyle
     (Ui::Editor * ui, QString bg, QString color, QString border)
     {
-        ui->TextEdit->setStyleSheet
+        ui->textEdit->setStyleSheet
             ("background-color: " + bg + ";"
             "color: " +  color + ";"
             "border-color: " + border );

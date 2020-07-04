@@ -4,7 +4,7 @@ void Files::saveFile(Ui::Editor * ui)
 {
     ui->actionSave->setToolTip("Saving file");
 
-    if (!ui->TextEdit->toPlainText().isEmpty())
+    if (!ui->textEdit->toPlainText().isEmpty())
     {
         QString fileName =
         QFileDialog::getSaveFileName
@@ -27,7 +27,7 @@ void Files::saveFile(Ui::Editor * ui)
                      "Cannot save file : " + file.errorString());
         }
         QTextStream out(&file);
-        QString text = ui->TextEdit->toPlainText();
+        QString text = ui->textEdit->toPlainText();
         out << text;
         file.close();
     }
@@ -60,7 +60,7 @@ void Files::openFile(Ui::Editor * ui)
     }
     QTextStream in(&file);
     QString text = in.readAll();
-    ui->TextEdit->setPlainText(text);
+    ui->textEdit->setPlainText(text);
     appearance(ui, fileName);
     file.close();
 }
@@ -68,7 +68,7 @@ void Files::openFile(Ui::Editor * ui)
 
 void Files::checkOpenFile(Ui::Editor * ui)
 {
-    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    if (!(ui->textEdit->toPlainText().isEmpty()))
     {
         QMessageBox ask;
         auto a = QMessageBox::question
@@ -109,7 +109,7 @@ void Files::newFile(Ui::Editor * ui)
     }
     setWindowTitle(fileName);
     QTextStream out(&file);
-    QString text = ui->TextEdit->toPlainText();
+    QString text = ui->textEdit->toPlainText();
     out << text;
     appearance(ui, fileName);
     file.close();
@@ -117,7 +117,7 @@ void Files::newFile(Ui::Editor * ui)
 
 void Files::checkNewFile(Ui::Editor * ui)
 {
-    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    if (!(ui->textEdit->toPlainText().isEmpty()))
     {
         auto a = QMessageBox::question
                 (this, "Warning", "Do you want to save an existing file?",
@@ -134,7 +134,7 @@ void Files::checkNewFile(Ui::Editor * ui)
 
 void Files::closeFile(Ui::Editor * ui, QWidget * parent)
 {
-    if (!(ui->TextEdit->toPlainText().isEmpty()))
+    if (!(ui->textEdit->toPlainText().isEmpty()))
     {
         auto a = QMessageBox::question
                 (this, "Warning", "Do you want to save an existing file?",

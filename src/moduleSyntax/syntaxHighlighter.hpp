@@ -10,6 +10,7 @@ class Highlighter : public QSyntaxHighlighter
 public:
     explicit Highlighter(QTextDocument *parent = 0);
     void highlightBlock(const QString &text) override;
+    void cppHighlight();
 
 private:
     struct HighlightingRule
@@ -21,6 +22,9 @@ private:
     QVector<HighlightingRule> highlightingRules;
     QRegularExpression commentStartExpression;
     QRegularExpression commentEndExpression;
+    QTextCharFormat dataTypeFormat;
+    QTextCharFormat accessModifierFormat;
+    QTextCharFormat keywordFormat;
     QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;
 };

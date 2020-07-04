@@ -1,17 +1,17 @@
 #include "src/Core/editor.hpp"
-#include "ui_mainwindow.h"
 
 void Editor::initAppearance()
 {
-    this->setCentralWidget(ui->TextEdit);
+    this->setCentralWidget(ui->textEdit);
     QFontMetrics metrics(font());
-    ui->TextEdit->setTabStopWidth(4 * metrics.width('a'));
+    ui->textEdit->setTabStopWidth(4 * metrics.width('a'));
 }
 
 void Editor::initHighlighter()
 {
-    highlighter = new Highlighter(ui->TextEdit->document());
-    highlighter->highlightBlock(ui->TextEdit->toPlainText());
+    highlighter = new Highlighter(ui->textEdit->document());
+    highlighter->cppHighlight();
+    highlighter->highlightBlock(ui->textEdit->toPlainText());
 }
 
 void Editor::setupFont()
@@ -20,6 +20,6 @@ void Editor::setupFont()
     centralWidget()->setFont(font);
 }
 
-void Editor::zoomIn() { ui->TextEdit->zoomIn(5); }
+void Editor::zoomIn() { ui->textEdit->zoomIn(5); }
 
-void Editor::zoomOut() { ui->TextEdit->zoomOut(5); }
+void Editor::zoomOut() { ui->textEdit->zoomOut(5); }
