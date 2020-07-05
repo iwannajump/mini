@@ -9,12 +9,12 @@ Editor::Editor(QWidget *parent)
     initConnects(parent);
     initShortcuts(parent);
     initHighlighter();
-    saveSettings();
+    setSettings();
 }
 
 Editor::~Editor()
 {
-    loadSettings();
+    getSettings();
     delete themes;
     delete files;
     delete highlighter;

@@ -27,15 +27,15 @@ private slots:
     void zoomOut();
 
 private:
-    void saveSettings();
-    void loadSettings();
+    void setSettings();
+    void getSettings();
     void initAppearance();
     void initHighlighter();
     void initConnects(QWidget * );
     void initShortcuts(QWidget * );
     Ui::Editor * ui{};
     Highlighter * highlighter;
-    Files * files = new Files;
+    Files * files = new Files(ui);
     Schemes * themes = new Schemes;
     QSettings * settings = new QSettings("mini", "mini", this);
 };

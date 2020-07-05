@@ -1,53 +1,47 @@
 #include "schemes.hpp"
 
-struct Theme
+void Schemes::textEditStyle
+    (Ui::Editor * ui, QString bg, QString color, QString border)
 {
-    static void textEditStyle
+    ui->textEdit->setStyleSheet
+        ("background-color: " + bg + ";"
+        "color: " +  color + ";"
+        "border-color: " + border );
+}
+void Schemes::menuBarStyle
     (Ui::Editor * ui, QString bg, QString color, QString border)
-    {
-        ui->textEdit->setStyleSheet
-            ("background-color: " + bg + ";"
-            "color: " +  color + ";"
-            "border-color: " + border );
-    }
-    static void menuBarStyle
-    (Ui::Editor * ui, QString bg, QString color, QString border)
-    {
-        ui->menuBar->setStyleSheet
-            ("background-color: " + bg + ";"
-            "color: " +  color + ";"
-            "border-color: " + border );
-    }
-    static void statusBarStyle
-    (Ui::Editor * ui, QString bg, QString color, QString border)
-    {
-        ui->statusBar->setStyleSheet
-            ("background-color: " + bg + ";"
-            "color: " +  color + ";"
-            "border-color: " + border );
-    }
-};
-
-QString Schemes::setColorSchemeLight(Ui::Editor * ui)
 {
-    Theme::textEditStyle (ui, "#ffffff", "#000000", "#000000");
-    Theme::menuBarStyle  (ui, "#ffffff", "#000000", "#000000");
-    Theme::statusBarStyle(ui, "#ffffff", "#000000", "#000000");
-    return "light";
+    ui->menuBar->setStyleSheet
+        ("background-color: " + bg + ";"
+        "color: " +  color + ";"
+        "border-color: " + border );
+}
+void Schemes::statusBarStyle
+    (Ui::Editor * ui, QString bg, QString color, QString border)
+{
+    ui->statusBar->setStyleSheet
+        ("background-color: " + bg + ";"
+        "color: " +  color + ";"
+        "border-color: " + border );
 }
 
-QString Schemes::setColorSchemeDark(Ui::Editor * ui)
+void Schemes::setColorSchemeLight(Ui::Editor * ui)
 {
-    Theme::textEditStyle (ui, "#000000", "#dadada", "#dadada");
-    Theme::menuBarStyle  (ui, "#0f0f0f", "#dadada", "#ffffff");
-    Theme::statusBarStyle(ui, "#0f0f0f", "#839496", "#ffffff");
-    return "dark";
+    textEditStyle (ui, "#ffffff", "#000000", "#000000");
+    menuBarStyle  (ui, "#ffffff", "#000000", "#000000");
+    statusBarStyle(ui, "#ffffff", "#000000", "#000000");
 }
 
-QString Schemes::setColorSchemeSolarized(Ui::Editor * ui)
+void Schemes::setColorSchemeDark(Ui::Editor * ui)
 {
-    Theme::textEditStyle (ui, "#002b36", "#839496", "#ffffff");
-    Theme::menuBarStyle  (ui, "#001c24", "#839496", "#ffffff");
-    Theme::statusBarStyle(ui, "#001c24", "#839496", "#ffffff");
-    return "solarized";
+    textEditStyle (ui, "#000000", "#dadada", "#dadada");
+    menuBarStyle  (ui, "#0f0f0f", "#dadada", "#ffffff");
+    statusBarStyle(ui, "#0f0f0f", "#839496", "#ffffff");
+}
+
+void Schemes::setColorSchemeSolarized(Ui::Editor * ui)
+{
+    textEditStyle (ui, "#002b36", "#839496", "#ffffff");
+    menuBarStyle  (ui, "#001c24", "#839496", "#ffffff");
+    statusBarStyle(ui, "#001c24", "#839496", "#ffffff");
 }

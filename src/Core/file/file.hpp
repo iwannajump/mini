@@ -1,6 +1,5 @@
 #pragma once
 
-//#include <ui_mainwindow.h>
 #include <ui_editor.h>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -9,13 +8,18 @@
 class Files : public QWidget
 {
     Q_OBJECT
+public:
+    Files(Ui::Editor * window_ui);
 
 public slots:
-    void saveFile(Ui::Editor * );
-    void openFile(Ui::Editor * );
-    void checkOpenFile(Ui::Editor * );
-    void newFile(Ui::Editor * );
-    void checkNewFile(Ui::Editor * );
-    void closeFile(Ui::Editor *, QWidget * );
-    void appearance(Ui::Editor *, const QString & );
+    void saveFile();
+    void openFile();
+    void checkOpenFile();
+    void newFile();
+    void checkNewFile();
+    void closeFile(QWidget * );
+    void appearance(const QString & );
+
+private:
+    Ui::Editor * ui;
 };

@@ -1,6 +1,6 @@
 #include "editor.hpp"
 
-void Editor::saveSettings()
+void Editor::setSettings()
 {
     QSettings settings("mini", "mini");
     this->centralWidget()->setFont
@@ -15,7 +15,7 @@ void Editor::saveSettings()
             (settings.value("file", QString()).value<QString>());
 }
 
-void Editor::loadSettings()
+void Editor::getSettings()
 {
     QSettings settings("mini", "mini");
     settings.setValue

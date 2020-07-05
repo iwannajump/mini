@@ -1,6 +1,11 @@
 #include "file.hpp"
 
-void Files::saveFile(Ui::Editor * ui)
+Files::Files(Ui::Editor * window_ui)
+{
+    ui = window_ui;
+}
+
+void Files::saveFile()
 {
     ui->actionSave->setToolTip("Saving file");
 
@@ -33,7 +38,7 @@ void Files::saveFile(Ui::Editor * ui)
     }
 }
 
-void Files::openFile(Ui::Editor * ui)
+void Files::openFile()
 {
     ui->actionOpen->setToolTip("Open file");
 
@@ -61,12 +66,12 @@ void Files::openFile(Ui::Editor * ui)
     QTextStream in(&file);
     QString text = in.readAll();
     ui->textEdit->setPlainText(text);
-    appearance(ui, fileName);
+    appearance(fileName);
     file.close();
 }
 
 
-void Files::checkOpenFile(Ui::Editor * ui)
+void Files::checkOpenFile()
 {
     if (!(ui->textEdit->toPlainText().isEmpty()))
     {
@@ -77,14 +82,14 @@ void Files::checkOpenFile(Ui::Editor * ui)
 
         if (a == QMessageBox::Yes)
         {
-            saveFile(ui);
+            saveFile();
         }
-        openFile(ui);
+        openFile();
     }
-    else openFile(ui);
+    else openFile();
 }
 
-void Files::newFile(Ui::Editor * ui)
+void Files::newFile()
 {
     QString fileName =
     QFileDialog::getSaveFileName
@@ -111,11 +116,11 @@ void Files::newFile(Ui::Editor * ui)
     QTextStream out(&file);
     QString text = ui->textEdit->toPlainText();
     out << text;
-    appearance(ui, fileName);
+    appearance(fileName);
     file.close();
 }
 
-void Files::checkNewFile(Ui::Editor * ui)
+void Files::checkNewFile()
 {
     if (!(ui->textEdit->toPlainText().isEmpty()))
     {
@@ -125,14 +130,14 @@ void Files::checkNewFile(Ui::Editor * ui)
 
         if (a == QMessageBox::Yes)
         {
-            saveFile(ui);
+            saveFile();
         }
-        newFile(ui);
+        newFile();
     }
-    else newFile(ui);
+    else newFile();
 }
 
-void Files::closeFile(Ui::Editor * ui, QWidget * parent)
+void Files::closeFile(QWidget * parent)
 {
     if (!(ui->textEdit->toPlainText().isEmpty()))
     {
@@ -142,16 +147,16 @@ void Files::closeFile(Ui::Editor * ui, QWidget * parent)
 
         if (a == QMessageBox::Yes)
         {
-            saveFile(ui);
+            saveFile();
         }
         parent->close();
     }
     else parent->close();
 }
 
-void Files::appearance(Ui::Editor * ui, const QString &fileName)
+void Files::appearance(const QString &fileName)
 {
     setWindowTitle(fileName);
-    ui->statusBar->showMessage(fileName);
+    ui->statusBar->showMessage(fileName, /*timeout = */0/*infinity*/);
 }
 
