@@ -1,23 +1,31 @@
 #include "schemes.hpp"
 
+Schemes::Schemes(Ui::Editor * window_ui, QWidget * window_widget)
+{
+    ui = window_ui;
+    widget = window_widget;
+}
+
 void Schemes::textEditStyle
-    (Ui::Editor * ui, QString bg, QString color, QString border)
+    (QString bg, QString color, QString border)
 {
     ui->textEdit->setStyleSheet
         ("background-color: " + bg + ";"
         "color: " +  color + ";"
         "border-color: " + border );
 }
+
 void Schemes::menuBarStyle
-    (Ui::Editor * ui, QString bg, QString color, QString border)
+    (QString bg, QString color, QString border)
 {
     ui->menuBar->setStyleSheet
         ("background-color: " + bg + ";"
         "color: " +  color + ";"
         "border-color: " + border );
 }
+
 void Schemes::statusBarStyle
-    (Ui::Editor * ui, QString bg, QString color, QString border)
+    (QString bg, QString color, QString border)
 {
     ui->statusBar->setStyleSheet
         ("background-color: " + bg + ";"
@@ -25,23 +33,35 @@ void Schemes::statusBarStyle
         "border-color: " + border );
 }
 
-void Schemes::setColorSchemeLight(Ui::Editor * ui)
+void Schemes::helpWindowStyle
+    (QString bg, QString color, QString border)
 {
-    textEditStyle (ui, "#ffffff", "#000000", "#000000");
-    menuBarStyle  (ui, "#ffffff", "#000000", "#000000");
-    statusBarStyle(ui, "#ffffff", "#000000", "#000000");
+    widget->setStyleSheet
+            ("background-color: " + bg + ";"
+            "color: " +  color + ";"
+            "border-color: " + border );
 }
 
-void Schemes::setColorSchemeDark(Ui::Editor * ui)
+void Schemes::setColorSchemeLight()
 {
-    textEditStyle (ui, "#000000", "#dadada", "#dadada");
-    menuBarStyle  (ui, "#0f0f0f", "#dadada", "#ffffff");
-    statusBarStyle(ui, "#0f0f0f", "#839496", "#ffffff");
+    textEditStyle  ("#f0f0f0", "#000000", "#000000");
+    menuBarStyle   ("#f0f0f0", "#000000", "#000000");
+    statusBarStyle ("#f0f0f0", "#000000", "#000000");
+    helpWindowStyle("#f0f0f0", "#000000", "#000000");
 }
 
-void Schemes::setColorSchemeSolarized(Ui::Editor * ui)
+void Schemes::setColorSchemeDark()
 {
-    textEditStyle (ui, "#002b36", "#839496", "#ffffff");
-    menuBarStyle  (ui, "#001c24", "#839496", "#ffffff");
-    statusBarStyle(ui, "#001c24", "#839496", "#ffffff");
+    textEditStyle  ("#000000", "#dadada", "#dadada");
+    menuBarStyle   ("#0f0f0f", "#dadada", "#ffffff");
+    statusBarStyle ("#0f0f0f", "#839496", "#ffffff");
+    helpWindowStyle("#0f0f0f", "#839496", "#ffffff");
+}
+
+void Schemes::setColorSchemeSolarized()
+{
+    textEditStyle  ("#002b36", "#839496", "#ffffff");
+    menuBarStyle   ("#001c24", "#839496", "#ffffff");
+    statusBarStyle ("#001c24", "#839496", "#ffffff");
+    helpWindowStyle("#001c24", "#839496", "#ffffff");
 }

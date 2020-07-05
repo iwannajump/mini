@@ -4,12 +4,12 @@
 void Editor::initShortcuts
     (QWidget * parent)
 {
-    QShortcut * CtrlQ{}; //exit
-    QShortcut * CtrlS{}; //save
-    QShortcut * CtrlN{}; //new file
-    QShortcut * CtrlO{}; //open
-    QShortcut * ZoomOut{};
-    QShortcut * ZoomIn{};
+    QShortcut * CtrlQ; //exit
+    QShortcut * CtrlS; //save
+    QShortcut * CtrlN; //new file
+    QShortcut * CtrlO; //open
+    QShortcut * ZoomOut;
+    QShortcut * ZoomIn;
 
     CtrlQ = new QShortcut(this);
     CtrlQ->setKey(Qt::CTRL + Qt::Key_Q);

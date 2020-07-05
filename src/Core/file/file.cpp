@@ -159,4 +159,3 @@ void Files::appearance(const QString &fileName)
     setWindowTitle(fileName);
     ui->statusBar->showMessage(fileName, /*timeout = */0/*infinity*/);
 }
-

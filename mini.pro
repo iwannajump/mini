@@ -22,16 +22,18 @@ SOURCES += \
     src/Core/main.cpp                       \
     src/Core/settings.cpp                   \
     src/Environment/appearance.cpp          \
+    src/Environment/help/help.cpp           \
     src/Environment/shortcuts.cpp           \
     src/Environment/schemes/schemes.cpp     \
-    src/moduleSyntax/cppHighlighter.cpp     \
-    src/moduleSyntax/syntaxHighlighter.cpp  \
+    src/Syntax/cppHighlighter.cpp           \
+    src/Syntax/syntaxHighlighter.cpp        \
 
 HEADERS += \
     src/Core/editor.hpp                     \
     src/Core/file/file.hpp                  \
+    src/Environment/help/help.hpp           \
     src/Environment/schemes/schemes.hpp     \
-    src/moduleSyntax/syntaxHighlighter.hpp  \
+    src/Syntax/syntaxHighlighter.hpp        \
 
 FORMS += \
     src/Core/editor.ui

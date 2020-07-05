@@ -6,8 +6,9 @@
 #include <QTextEdit>
 #include <QSettings>
 #include <src/Core/file/file.hpp>
+#include <src/Environment/help/help.hpp>
 #include <src/Environment/schemes/schemes.hpp>
-#include <src/moduleSyntax/syntaxHighlighter.hpp>
+#include <src/Syntax/syntaxHighlighter.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Editor; class Files; }
@@ -35,7 +36,9 @@ private:
     void initShortcuts(QWidget * );
     Ui::Editor * ui{};
     Highlighter * highlighter;
+    QWidget * helpWindow = new QWidget;
+    Help * help = new Help(helpWindow);
     Files * files = new Files(ui);
-    Schemes * themes = new Schemes;
+    Schemes * themes = new Schemes(ui, helpWindow);
     QSettings * settings = new QSettings("mini", "mini", this);
 };

@@ -29,21 +29,12 @@ public:
     QAction *actionOpen;
     QAction *actionSave;
     QAction *actionSave_as;
-    QAction *action1;
-    QAction *action2;
-    QAction *action3;
-    QAction *action4;
-    QAction *action5;
     QAction *actionExit;
-    QAction *actionPaste;
-    QAction *actionUndo;
-    QAction *actionUndo_2;
-    QAction *actionRedo;
     QAction *actionLightScheme;
     QAction *actionDarkScheme;
     QAction *actionSolarizedTheme;
+    QAction *actionHelp;
     QAction *actionFont;
-    QAction *actionAbout;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
     QPlainTextEdit *textEdit;
@@ -68,26 +59,8 @@ public:
         actionSave->setObjectName(QString::fromUtf8("actionSave"));
         actionSave_as = new QAction(Editor);
         actionSave_as->setObjectName(QString::fromUtf8("actionSave_as"));
-        action1 = new QAction(Editor);
-        action1->setObjectName(QString::fromUtf8("action1"));
-        action2 = new QAction(Editor);
-        action2->setObjectName(QString::fromUtf8("action2"));
-        action3 = new QAction(Editor);
-        action3->setObjectName(QString::fromUtf8("action3"));
-        action4 = new QAction(Editor);
-        action4->setObjectName(QString::fromUtf8("action4"));
-        action5 = new QAction(Editor);
-        action5->setObjectName(QString::fromUtf8("action5"));
         actionExit = new QAction(Editor);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
-        actionPaste = new QAction(Editor);
-        actionPaste->setObjectName(QString::fromUtf8("actionPaste"));
-        actionUndo = new QAction(Editor);
-        actionUndo->setObjectName(QString::fromUtf8("actionUndo"));
-        actionUndo_2 = new QAction(Editor);
-        actionUndo_2->setObjectName(QString::fromUtf8("actionUndo_2"));
-        actionRedo = new QAction(Editor);
-        actionRedo->setObjectName(QString::fromUtf8("actionRedo"));
         actionLightScheme = new QAction(Editor);
         actionLightScheme->setObjectName(QString::fromUtf8("actionLightScheme"));
         actionDarkScheme = new QAction(Editor);
@@ -96,8 +69,8 @@ public:
         actionSolarizedTheme->setObjectName(QString::fromUtf8("actionSolarizedTheme"));
         actionFont = new QAction(Editor);
         actionFont->setObjectName(QString::fromUtf8("actionFont"));
-        actionAbout = new QAction(Editor);
-        actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
+        actionHelp = new QAction(Editor);
+        actionHelp->setObjectName(QString::fromUtf8("actionHelp"));
         centralwidget = new QWidget(Editor);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
@@ -138,6 +111,7 @@ public:
         menuColorScheme->addAction(actionLightScheme);
         menuColorScheme->addAction(actionDarkScheme);
         menuColorScheme->addAction(actionSolarizedTheme);
+        menuHelp->addAction(actionHelp);
 
         retranslateUi(Editor);
 
@@ -151,25 +125,16 @@ public:
         actionOpen->setText(QCoreApplication::translate("Editor", "Open", nullptr));
         actionSave->setText(QCoreApplication::translate("Editor", "Save", nullptr));
         actionSave_as->setText(QCoreApplication::translate("Editor", "Save as", nullptr));
-        action1->setText(QCoreApplication::translate("Editor", "1", nullptr));
-        action2->setText(QCoreApplication::translate("Editor", "2", nullptr));
-        action3->setText(QCoreApplication::translate("Editor", "3", nullptr));
-        action4->setText(QCoreApplication::translate("Editor", "4", nullptr));
-        action5->setText(QCoreApplication::translate("Editor", "5", nullptr));
         actionExit->setText(QCoreApplication::translate("Editor", "Exit", nullptr));
-        actionPaste->setText(QCoreApplication::translate("Editor", "Copy", nullptr));
-        actionUndo->setText(QCoreApplication::translate("Editor", "Paste", nullptr));
-        actionUndo_2->setText(QCoreApplication::translate("Editor", "Undo", nullptr));
-        actionRedo->setText(QCoreApplication::translate("Editor", "Redo", nullptr));
         actionLightScheme->setText(QCoreApplication::translate("Editor", "light", nullptr));
         actionDarkScheme->setText(QCoreApplication::translate("Editor", "dark", nullptr));
         actionSolarizedTheme->setText(QCoreApplication::translate("Editor", "solarized", nullptr));
         actionFont->setText(QCoreApplication::translate("Editor", "Font", nullptr));
-        actionAbout->setText(QCoreApplication::translate("Editor", "About", nullptr));
         menu->setTitle(QCoreApplication::translate("Editor", "File", nullptr));
         menuSettings->setTitle(QCoreApplication::translate("Editor", "Edit", nullptr));
         menuColorScheme->setTitle(QCoreApplication::translate("Editor", "Color scheme", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("Editor", "Help", nullptr));
+        actionHelp->setText(QCoreApplication::translate("Editor", "Open Help", nullptr));
     } // retranslateUi
 
 };

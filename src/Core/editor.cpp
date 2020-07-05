@@ -12,6 +12,12 @@ Editor::Editor(QWidget *parent)
     setSettings();
 }
 
+//void Editor::openHelp()
+//{
+//    helpWindow->resize(400, 600);
+//    helpWindow->show();
+//}
+
 Editor::~Editor()
 {
     getSettings();
