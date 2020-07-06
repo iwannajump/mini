@@ -1,4 +1,4 @@
-#include "editor.hpp"
+#include "src/Core/editor.hpp"
 
 void Editor::setSettings()
 {
@@ -11,7 +11,7 @@ void Editor::setSettings()
             (settings.value("stylesheet/menubar", QString()).value<QString>());
     ui->statusBar->setStyleSheet
             (settings.value("stylesheet/statusbar", QString()).value<QString>());
-    this->helpWindow->setStyleSheet
+    this->helpWindow->setStyleSheet //same color as menuBar
             (settings.value("stylesheet/menubar", QString()).value<QString>());
     ui->textEdit->setPlainText
             (settings.value("file", QString()).value<QString>());

@@ -1,4 +1,4 @@
-#include "editor.hpp"
+#include "src/Core/editor.hpp"
 #include "ui_editor.h"
 
 void Editor::initConnects

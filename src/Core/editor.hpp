@@ -5,9 +5,9 @@
 #include <QFontDialog>
 #include <QTextEdit>
 #include <QSettings>
-#include <src/Core/file/file.hpp>
-#include <src/Environment/help/help.hpp>
-#include <src/Environment/schemes/schemes.hpp>
+#include <src/File/file.hpp>
+#include <src/Help/help.hpp>
+#include <src/Schemes/schemes.hpp>
 #include <src/Syntax/syntaxHighlighter.hpp>
 
 QT_BEGIN_NAMESPACE

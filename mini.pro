@@ -16,27 +16,29 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/Core/connects.cpp                   \
-    src/Core/editor.cpp                     \
-    src/Core/file/file.cpp                  \
-    src/Core/main.cpp                       \
-    src/Core/settings.cpp                   \
-    src/Environment/appearance.cpp          \
-    src/Environment/help/help.cpp           \
-    src/Environment/shortcuts.cpp           \
-    src/Environment/schemes/schemes.cpp     \
-    src/Syntax/cppHighlighter.cpp           \
-    src/Syntax/syntaxHighlighter.cpp        \
+    src/Core/appearance.cpp             \
+    src/Core/connects.cpp               \
+    src/Core/editor.cpp                 \
+    src/Core/main.cpp                   \
+    src/File/file.cpp                   \
+    src/Help/help.cpp                   \
+    src/Schemes/schemes.cpp             \
+    src/Settings/settings.cpp           \
+    src/Shortcuts/shortcuts.cpp         \
+    src/Syntax/syntaxHighlighter.cpp    \
+    src/Syntax/cppHighlighter.cpp       \
 
 HEADERS += \
-    src/Core/editor.hpp                     \
-    src/Core/file/file.hpp                  \
-    src/Environment/help/help.hpp           \
-    src/Environment/schemes/schemes.hpp     \
-    src/Syntax/syntaxHighlighter.hpp        \
+    src/Core/editor.hpp                 \
+    src/File/file.hpp                   \
+    src/Help/help.hpp                   \
+    src/Schemes/schemes.hpp             \
+    src/Syntax/syntaxHighlighter.hpp    \
+
 
 FORMS += \
-    src/Core/editor.ui
+    src/Core/editor.ui                  \
+    src/Help/help.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

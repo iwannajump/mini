@@ -1,4 +1,5 @@
 #include "file.hpp"
+#include <QDebug>
 
 Files::Files(Ui::Editor * window_ui)
 {
@@ -25,11 +26,14 @@ void Files::saveFile()
         );
 
         QFile file(fileName);
+//        QFileInfo extension(file);
+//        return extension.suffix();
         if (!file.open(QFile::WriteOnly | QFile::Text))
         {
             QMessageBox::warning
                     (this, "Warning",
                      "Cannot save file : " + file.errorString());
+            return;
         }
         QTextStream out(&file);
         QString text = ui->textEdit->toPlainText();
@@ -56,6 +60,8 @@ void Files::openFile()
     );
 
     QFile file(fileName);
+//    QFileInfo extension(file);
+//    return extension.suffix();
     if (!file.open(QIODevice::ReadOnly | QFile::Text))
     {
         QMessageBox::warning
@@ -69,7 +75,6 @@ void Files::openFile()
     appearance(fileName);
     file.close();
 }
-
 
 void Files::checkOpenFile()
 {
@@ -105,6 +110,8 @@ void Files::newFile()
     );
 
     QFile file(fileName);
+//    QFileInfo extension(file);
+//    return extension.suffix();
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
         QMessageBox::warning

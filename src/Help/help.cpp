@@ -7,6 +7,6 @@ Help::Help(QWidget *helpWindow)
 
 void Help::showHelpWindow()
 {
-    window->resize(400, 600);
+    ui->setupUi(window);
     window->show();
 }
