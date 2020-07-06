@@ -10,6 +10,6 @@ $ make
 ```
 
 ## I want to realize:
-1) Syntax utocomplete
+1) Syntax autocomplete
 2) User themes
 3) Tabs support
