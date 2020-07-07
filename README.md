@@ -1,9 +1,9 @@
-# Mini Editor
+# Unterstützung Editor
 
 ## How to compile?
 
 ```
-$ git clone  github.com/iwannajump/mini`
+$ git clone  github.com/oxfffffe/unterstutzung
 $ cd mini
 $ qmake mini.pro
 $ make
