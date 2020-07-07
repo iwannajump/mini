@@ -3,7 +3,7 @@
 ## How to compile?
 
 ```
-$ git clone  github.com/oxfffffe/unterstutzung
+$ git clone  github.com/oxfffffe/qt
 $ cd mini
 $ qmake mini.pro
 $ make
