@@ -1,4 +1,4 @@
-# Unterstützung Editor
+# Empty Qt Editor
 
 ## How to compile?
 
